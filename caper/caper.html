@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="Shift_JIS"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <title>caper -- LALR(1) �p�[�T�W�F�l���[�^</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS"/>
+    <title>caper -- LALR(1) パーサジェネレータ</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <style type="text/css">
 	  <!--
 		  @import url("global.css");
@@ -23,7 +23,7 @@
     <div id="container">
       <div id="banner">
 	<div id="header"><a href="caper.html">caper</a></div>
-	<div id="subtext">LALR(1) �p�[�T�W�F�l���[�^</div>
+	<div id="subtext">LALR(1) パーサジェネレータ</div>
       </div>
       <div id="right">
 	<div class="title">Main</div>
@@ -44,19 +44,19 @@
 	<a href="caper_tutorial5.html">Tutorial5</a>
       </div>
       <div id="content">
-	<h2><a name="i0"> </a> caper�Ƃ�</h2>
-	<p>modern�ŃN���[����C++�R�[�h���o�͂���LALR(1)�p�[�T�W�F�l���[�^�ł��B</p>
-	<p>���܂���JavaScript/C#/D�p�̃p�[�T���o�͂ł��܂��B</p>
-	<p>�j���[�X�E������<a href="caper_download.html">�_�E�����[�h�̃y�[�W</a>�ŁB</p>
-	<h2><a name="i1"> </a> �R���Z�v�g</h2>
+	<h2><a name="i0"> </a> caperとは</h2>
+	<p>modernでクリーンなC++コードを出力するLALR(1)パーサジェネレータです。</p>
+	<p>おまけでJavaScript/C#/D用のパーサも出力できます。</p>
+	<p>ニュース・履歴は<a href="caper_download.html">ダウンロードのページ</a>で。</p>
+	<h2><a name="i1"> </a> コンセプト</h2>
 	<p>
-	  caper�ŏo�͂����p�[�T�̃R�[�h�𑼂̃v���W�F�N�g�ƍ����āu�菑���̃p�[�T�ł����Ȃɂ��H�v
-	  �Ƌ��قł���̂����z�B</p>
+	  caperで出力したパーサのコードを他のプロジェクトと混ぜて「手書きのパーサですがなにか？」
+	  と強弁できるのが理想。</p>
 	<p>
-	  �i���Q�[���̃R�}���h��͂Ɏg���邭�炢�g���₷���I</p>
-	<h2><a name="i2"> </a> ���Ƃ��΁H</h2>
+	  格闘ゲームのコマンド解析に使えるくらい使いやすく！</p>
+	<h2><a name="i2"> </a> たとえば？</h2>
 	<p>
-	  ����Ȋ����̓��̓t�@�C����</p>
+	  こんな感じの入力ファイルが</p>
 <pre>
 %token Number&lt;int&gt; Add Sub Mul Div;
 %namespace calc;
@@ -73,7 +73,7 @@ Term&lt;int&gt; : [Identity] Number(0)
           ;
 </pre>
 	<p>
-	  ����Ȋ����ɂȂ��ďo�Ă��܂��B(�����͏ȗ�)</p>
+	  こんな感じになって出てきます。(実装は省略)</p>
 <pre>
 namespace calc {
 
@@ -105,9 +105,9 @@ public:
 
 </pre>
 	<p>
-	  ���̃w�b�_�t�@�C���P���C���N���[�h���邾���ŁA�p�[�T�𗘗p�ł��Ă��܂��܂��B</p>
+	  このヘッダファイル１個をインクルードするだけで、パーサを利用できてしまいます。</p>
 	<p>
-	  �ڂ�����<a href="caper_tutorial0.html">�`���[�g���A��</a>�ŁI</p>
+	  詳しくは<a href="caper_tutorial0.html">チュートリアル</a>で！</p>
       </div>
       <div id="footer">Content &copy; 2006-2008 Naoyuki HIRAYAMA</div>
       <!-- Designed by and (c) Copyright 2005 Shady-Sock ( http://www.oswd.org/userinfo.phtml?user=Shady-Sock ). Email ( sani.sarip@gmail.com ). Do not remove this. -->

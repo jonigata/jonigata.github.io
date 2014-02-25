@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="Shift_JIS"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <title>caper -- LALR(1) �p�[�T�W�F�l���[�^</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS"/>
+    <title>caper -- LALR(1) パーサジェネレータ</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <style type="text/css">
       <!--
 		  @import url("global.css");
@@ -36,11 +36,11 @@
 		<a href="caper_tutorial5.html">Tutorial5</a>
       </div>
       <div id="content">
-		<h1><a name="i0"> </a> tutorial 4 -- �d�� ��</h1>
-		<p>�\������������؍\��(AST)�̌`�ɕϊ�����^�C�v�̓d��ł��B������Ɠ���Ȃ�܂��B</p>
+		<h1><a name="i0"> </a> tutorial 4 -- 電卓 β</h1>
+		<p>構文をいったん木構造(AST)の形に変換するタイプの電卓です。ちょっと難しくなります。</p>
 
-		<h2><a name="i1"> </a> AST�t�@�C��</h2>
-		<p>AST(���ۍ\����)���ȉ��̂悤�ɒ�`���A<code>calc1_ast.hpp</code>�Ƃ��܂����B</p>
+		<h2><a name="i1"> </a> ASTファイル</h2>
+		<p>AST(抽象構文木)を以下のように定義し、<code>calc1_ast.hpp</code>としました。</p>
 <pre>
 struct Node {
         virtual ~Node(){}
@@ -100,7 +100,7 @@ struct NumberTerm : public Term {
 };
 </pre>
 
-		<h2><a name="i2"> </a> ���@�t�@�C��</h2>
+		<h2><a name="i2"> </a> 文法ファイル</h2>
 <pre>
 %token Number&lt;Number*&gt; Add Sub Mul Div;
 %namespace calc;
@@ -117,21 +117,21 @@ Term&lt;Term*&gt; : [MakeTerm] Number(0)
             ;
 </pre>
 
-		<p>���@�t�@�C����<code>calc0</code>�Ƃ��܂�ς��܂��񂪁A�ȉ��̂悤�Ɋe�L���̌^���ς���Ă��܂��B</p>
+		<p>文法ファイルは<code>calc0</code>とあまり変わりませんが、以下のように各記号の型が変わっています。</p>
 		<pre>
 Number&lt;Number*&gt;
 Expr&lt;Expr*&gt;
 Term&lt;Term*&gt;
 		</pre>
-		<p>������A�ȒP�̂��߁A���������[�N�ɂ��Ă͍l���Ȃ����̂Ƃ��܂��B</p>
-		<p>���̕��@���琶�������p�[�T�͓�����<code>&quot;Number&quot; &quot;Expr&quot; &quot;Term&quot;</code>���̌^��K�v�Ƃ��܂��̂ŁA�p�[�T��<code>include</code>��������AST�̒�`��<code>include</code>����K�v������܂��B�����ŁA�ȉ��̂悤�ȓ��e�̃t�@�C�����쐬���A<code>&quot;calc1.hpp&quot;</code>�Ƃ��ĕۑ����܂��B</p>
+		<p>※今回、簡単のため、メモリリークについては考えないものとします。</p>
+		<p>この文法から生成されるパーサは内部で<code>&quot;Number&quot; &quot;Expr&quot; &quot;Term&quot;</code>等の型を必要としますので、パーサを<code>include</code>するより先にASTの定義を<code>include</code>する必要があります。そこで、以下のような内容のファイルを作成し、<code>&quot;calc1.hpp&quot;</code>として保存します。</p>
 		<pre>
 #include &quot;cacl1_ast.hpp&quot;
 #include &quot;cacl1_parser.hpp&quot;
 		</pre>
-		<p>�p�[�T����ӏ����炵���g�p���Ȃ����Ƃ��킩���Ă���Ȃ�A���R�����ŗ���include����悤�ɂ��Ă��\���܂��񂪁A<code>calc1_parser.cpg</code>����쐬����<code>calc1_parser.hpp</code>�������<code>calc1_ast.hpp</code>��<code>include</code>����K�v�����邱�Ƃ͊o���Ă����Ă��������B�����Ȃ��ƁA<code>Expr</code>�Ȃǂ�����`�ł���Ƃ����R���p�C���G���[���łĂ��܂��܂��B</p>
+		<p>パーサを一箇所からしか使用しないことがわかっているなら、当然そこで両方includeするようにしても構いませんが、<code>calc1_parser.cpg</code>から作成した<code>calc1_parser.hpp</code>よりも先に<code>calc1_ast.hpp</code>を<code>include</code>する必要があることは覚えておいてください。さもないと、<code>Expr</code>などが未定義であるというコンパイルエラーがでてしまいます。</p>
 
-		<h2><a name="i3"> </a> ����t�@�C��</h2>
+		<h2><a name="i3"> </a> 操作ファイル</h2>
 <pre>
 #include &quot;calc1.hpp&quot;
 #include &lt;iostream&gt;
@@ -154,7 +154,7 @@ public:
                         c = getc();
                 } while( isspace( c ) );
 
-                // �L����
+                // 記号類
                 switch( c ) {
                 case '+': return calc::token_Add;
                 case '-': return calc::token_Sub;
@@ -163,7 +163,7 @@ public:
                 case EOF: return calc::token_eof;
                 }
 
-                // ����
+                // 整数
                 if( isdigit( c ) ) {
                         int n = 0;
                         while( c != EOF &amp;&amp; isdigit( c ) ) {
@@ -247,7 +247,7 @@ struct SemanticAction {
 
 int main( int, char** )
 {
-        // �X�L���i
+        // スキャナ
         typedef std::istreambuf_iterator&lt;char&gt; is_iterator;
         is_iterator b( std::cin );
         is_iterator e;
@@ -273,20 +273,20 @@ int main( int, char** )
         return 0;
 }
 </pre>
-		<p>��Ⓑ���Ȃ��Ă��܂��B</p>
-		<p>�܂��A<code>scanner</code>�́A<code>int</code>�^�łȂ�<code>Node*</code>�^���g�[�N���̒l�Ƃ��ĕԂ��悤�ɂȂ��Ă��܂��B��̓I�ɂ́A<code>token_Number</code>��Ԃ��Ƃ��ɒl�Ƃ���<code>new Number(n)</code>�������̂�Ԃ��܂��B</p>
-		<p>���ɃZ�}���e�B�b�N�A�N�V�����ɂ��āB����A�l�W���S�̗̂v�f�������^�Ƃ��ẮA<code>Node*</code>��p���܂��B�����ĕ��@�t�@�C���̍��ڂŎ������悤�ɁA�e���@�v�f�̌^��<code>Node*</code>�Ƃ͈قȂ�̂ŁA����ɂ��킹�ĕϊ����s���K�v������܂��B</p>
-		<p>���̃P�[�X�ł́A<code>downcast</code>��<code>Node*</code>��<code>Expr*/Term*/Number*</code>�̕ϊ��ɗp�����܂��B<code>Expr/Term/Number</code>�͂������<code>Node</code>�̔h���N���X�Ȃ̂ŁA<code>template</code>�����o�֐����`����΂��ׂĈꏏ�����Ɉ������Ƃ��\�ł��B</p>
+		<p>やや長くなっています。</p>
+		<p>まず、<code>scanner</code>は、<code>int</code>型でなく<code>Node*</code>型をトークンの値として返すようになっています。具体的には、<code>token_Number</code>を返すときに値として<code>new Number(n)</code>したものを返します。</p>
+		<p>次にセマンティックアクションについて。今回、値集合全体の要素を現す型としては、<code>Node*</code>を用います。そして文法ファイルの項目で示したように、各文法要素の型は<code>Node*</code>とは異なるので、それにあわせて変換を行う必要があります。</p>
+		<p>このケースでは、<code>downcast</code>が<code>Node*</code>→<code>Expr*/Term*/Number*</code>の変換に用いられます。<code>Expr/Term/Number</code>はいずれも<code>Node</code>の派生クラスなので、<code>template</code>メンバ関数を定義すればすべて一緒くたに扱うことが可能です。</p>
 		<pre>
 template &lt; class T &gt;
 void downcast( T*&amp; x, Node* y ) { x = static_cast&lt;T*&gt;( y ); }
 		</pre>
-		<p>�t��<code>Expr*/Term*/Number*</code>��<code>Node*</code>�̕ϊ����s���ꍇ�A<code>Expr/Term/Number</code>�͂������<code>Node</code>�̔h���N���X�Ȃ̂ŁA������ꏏ�����ɂ��Ĉȉ��̂悤�Ɉ������Ƃ��ł��܂��B</p>
+		<p>逆に<code>Expr*/Term*/Number*</code>→<code>Node*</code>の変換を行う場合、<code>Expr/Term/Number</code>はいずれも<code>Node</code>の派生クラスなので、これも一緒くたにして以下のように扱うことができます。</p>
 		<pre>
 template &lt; class T &gt;
 void upcast( Node*&amp; x, T* y ) { x = y; }
 		</pre>
-		<p>�ȏ���ӂ܂��āA�Z�}���e�B�b�N�A�N�V�����͂��Ƃ��Έȉ��̂悤�ɂȂ�܂��B</p>
+		<p>以上をふまえて、セマンティックアクションはたとえば以下のようになります。</p>
 		<pre>
 Expr* MakeAdd( Expr* x, Term* y )
 {
@@ -294,8 +294,8 @@ Expr* MakeAdd( Expr* x, Term* y )
     return new AddExpr( x, new TermExpr( y ) ) ;
 }
 </pre>
-		<p>���ɓ�����Ƃ͂Ȃ��Ǝv���܂��Byacc�Ȃǂ�AST�����Ƃ��ɂ悭�K�v�ɂȂ�A�L���X�g�̃R�[�h���K�v�Ȃ����Ƃ��킩��܂���(�Ƃ����Ă��A�p�[�T�̓��[�U���猩���Ȃ��悤��upcast/downcast����g���Ă���Ă���킯�ł���)�B</p>
-		<p><code>main</code>�֐��͂قƂ�Ǖς�肠��܂���B<code>accept</code>���ʂ�AST�̃��[�g�m�[�h�ɂȂ�܂��̂ŁA����<code>calc</code>�֐������s���ĉ��Z���ʂ�\�����Ă��܂��B</p>
+		<p>特に難しいことはないと思います。yaccなどでASTを作るときによく必要になる、キャストのコードが必要ないことがわかりますね(といっても、パーサはユーザから見えないようにupcast/downcastを駆使してくれているわけですが)。</p>
+		<p><code>main</code>関数はほとんど変わりありません。<code>accept</code>結果はASTのルートノードになりますので、その<code>calc</code>関数を実行して演算結果を表示しています。</p>
 
       </div>
 
