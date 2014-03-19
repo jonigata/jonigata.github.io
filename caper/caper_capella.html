@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="Shift_JIS"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <title>caper -- LALR(1) パーサジェネレータ</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>caper -- LALR(1) �p�[�T�W�F�l���[�^</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS"/>
     <style type="text/css">
       <!--
 		  @import url("global.css");
@@ -37,14 +37,14 @@
       </div>
       <div id="content">
 		<h1><a name="i0"> </a> Capella -- AST generation utility</h1>
-		<p>capellaは、定義ファイルを読み込んで、それに対応するASTを定義するようなデータ構造をC++ソースで出力するユーティリティです。</p>
-		<p>caperと一緒に使用されることを意図して作られたものですが、出力するソースはcaperには依存しません。STL(オプションによってはboostも)に依存します。</p>
+		<p>capella�́A��`�t�@�C����ǂݍ���ŁA����ɑΉ�����AST���`����悤�ȃf�[�^�\����C++�\�[�X�ŏo�͂��郆�[�e�B���e�B�ł��B</p>
+		<p>caper�ƈꏏ�Ɏg�p����邱�Ƃ��Ӑ}���č��ꂽ���̂ł����A�o�͂���\�[�X��caper�ɂ͈ˑ����܂���BSTL(�I�v�V�����ɂ���Ă�boost��)�Ɉˑ����܂��B</p>
 		
-		<p>おまけ程度のデキなのでそのつもりで一つよろしくお願いします(もちろん間違いを指摘していただける分には大歓迎ですが)。</p>
+		<p>���܂����x�̃f�L�Ȃ̂ł��̂���ň��낵�����肢���܂�(�������ԈႢ���w�E���Ă��������镪�ɂ͑劽�}�ł���)�B</p>
 
-		<h2>入力ファイル</h2>
+		<h2>���̓t�@�C��</h2>
 		
-		<p>入力ファイルは以下のような形になります。</p>
+		<p>���̓t�@�C���͈ȉ��̂悤�Ȍ`�ɂȂ�܂��B</p>
 
 <pre>
 atom = Identifier;
@@ -72,14 +72,14 @@ type List = Identifier(etype);
 type Variant = Identifier*(choises);
 </pre>
 
-		<p>順に見ていきましょう。</p>
+		<p>���Ɍ��Ă����܂��傤�B</p>
 		<br/>
 
 <pre>
 atom = Identifier;
 </pre>
 
-		<p>atom(それ以上分解できない要素)を定義します。scannerから渡ってくるデータなどになるでしょう。</p>
+		<p>atom(����ȏ㕪���ł��Ȃ��v�f)���`���܂��Bscanner����n���Ă���f�[�^�ȂǂɂȂ�ł��傤�B</p>
 		<br/>
 
 <pre>
@@ -92,7 +92,7 @@ class-footer = {
 }
 </pre>
 
-		<p>出力されるすべてのAST定義構造体の頭部/末尾に共通に挿入されるテキストです。字面的には、中かっこの対応程度しか見ませんので、コメントなどを入れることもできます。。</p>
+		<p>�o�͂���邷�ׂĂ�AST��`�\���̂̓���/�����ɋ��ʂɑ}�������e�L�X�g�ł��B���ʓI�ɂ́A���������̑Ή����x�������܂���̂ŁA�R�����g�Ȃǂ����邱�Ƃ��ł��܂��B�B</p>
 		<br/>
 
 <pre>
@@ -108,23 +108,23 @@ type List = Identifier(etype);
 type Variant = Identifier*(choises);
 </pre>
 
-		<p>ASTの木構造を表現するデータ定義です。次節で説明します。</p>
+		<p>AST�̖؍\����\������f�[�^��`�ł��B���߂Ő������܂��B</p>
 
-		<h2><a name="i1"> </a>AST定義</h2>
+		<h2><a name="i1"> </a>AST��`</h2>
 
-		<p>AST定義は「type」宣言を用いて行います。type宣言には大きく分けて２通りあります。</p>
+		<p>AST��`�́utype�v�錾��p���čs���܂��Btype�錾�ɂ͑傫�������ĂQ�ʂ肠��܂��B</p>
 		
-		<h3>フィールド宣言</h3>
+		<h3>�t�B�[���h�錾</h3>
 
-		<p>[ type 構造体名 = フィールド型(フィールド名) ] という宣言では、ターゲットの構造体のフィールド定義が行われます。</p>
+		<p>[ type �\���̖� = �t�B�[���h�^(�t�B�[���h��) ] �Ƃ����錾�ł́A�^�[�Q�b�g�̍\���̂̃t�B�[���h��`���s���܂��B</p>
 		<br/>
 
-		<p>たとえば、</p>
+		<p>���Ƃ��΁A</p>
 <pre>
 type Module = Declarations(declarations);
 </pre>
 
-		<p>このような宣言では、以下のような構造体が出力されます(詳細は省略、以下同じ)。	</p>
+		<p>���̂悤�Ȑ錾�ł́A�ȉ��̂悤�ȍ\���̂��o�͂���܂�(�ڍׂ͏ȗ��A�ȉ�����)�B	</p>
 
 <pre>
 struct Module {
@@ -133,13 +133,13 @@ struct Module {
 </pre>
 
 		<br/>
-		<p>複数のフィールドを持つ場合は、以下のようにします。</p>
+		<p>�����̃t�B�[���h�����ꍇ�́A�ȉ��̂悤�ɂ��܂��B</p>
 	
 <pre>
 type TypeDef = Identifier(name), TypeDefRight(right);
 </pre>
 
-		<p>出力はこのようになります。</p>
+		<p>�o�͂͂��̂悤�ɂȂ�܂��B</p>
 
 <pre>
 struct TypeDef {
@@ -149,13 +149,13 @@ struct TypeDef {
 </pre>
 
 		<br/>
-		<p>各フィールドがコンテナになる(同じフィールドを複数所持できる)ようにしたい場合、型名の後に"*"をつけることで、その型はフィールドはコンテナになります。</p>
+		<p>�e�t�B�[���h���R���e�i�ɂȂ�(�����t�B�[���h�𕡐������ł���)�悤�ɂ������ꍇ�A�^���̌��"*"�����邱�ƂŁA���̌^�̓t�B�[���h�̓R���e�i�ɂȂ�܂��B</p>
 
 <pre>
 type Atoms = Identifier*(elements);
 </pre>
 
-		<p>出力はこのようになります。</p>
+		<p>�o�͂͂��̂悤�ɂȂ�܂��B</p>
 
 <pre>
 struct Atoms {
@@ -164,19 +164,19 @@ struct Atoms {
 </pre>
 		<br/>
 
-		<h3>多態宣言</h3>
+		<h3>���Ԑ錾</h3>
 		
-		<p> [ type 基底構造体名 = 派生構造体名1 | 派生構造体名2; ] という形の宣言では、構造体の継承構造が構築されます。</p>
+		<p> [ type ���\���̖� = �h���\���̖�1 | �h���\���̖�2; ] �Ƃ����`�̐錾�ł́A�\���̂̌p���\�����\�z����܂��B</p>
 			
 		<br/>
-		<p>たとえば、</p>
+		<p>���Ƃ��΁A</p>
 	
 <pre>
 type AtomDef = Atoms(atoms);
 type TypeDef = Identifier(name), TypeDefRight(right);
 </pre>
 
-		<p>という宣言があるとき、これをそのまま変換すると</p>
+		<p>�Ƃ����錾������Ƃ��A��������̂܂ܕϊ������</p>
 	
 <pre>
 struct AtomDef {
@@ -188,13 +188,13 @@ struct TypeDef {
 };
 </pre>
 
-		<p>という出力が生成されますが、これに加えて</p>
+		<p>�Ƃ����o�͂���������܂����A����ɉ�����</p>
 
 <pre>
 type Declaration = AtomDef | TypeDef;
 </pre>
 
-		<p>という宣言を加えると、AtomDef/TypeDefに共通の基底クラス "Declaration" が挿入され、</p>
+		<p>�Ƃ����錾��������ƁAAtomDef/TypeDef�ɋ��ʂ̊��N���X "Declaration" ���}������A</p>
 
 <pre>
 struct Declaration {};
@@ -207,29 +207,29 @@ struct TypeDef : public Declaration {
 };
 </pre>
 
-		<p>このような出力になります。</p>
+		<p>���̂悤�ȏo�͂ɂȂ�܂��B</p>
 	
-		<h2>オプション</h2>
+		<h2>�I�v�V����</h2>
 
-		<p>デフォルト以外はあまりデバッグしてないのであてになりません。</p>
+		<p>�f�t�H���g�ȊO�͂��܂�f�o�b�O���ĂȂ��̂ł��ĂɂȂ�܂���B</p>
 
 		<dl>
-		  <dt>-c++</dt><dd>通常のC++ソースを出力します(デフォルト)。</dd>
-		  <dt>-c++-shared</dt><dd>boost::shared_ptrを用いたコードを出力します</dd>
-		  <dt>-c++-variant</dt><dd>boost::variantを用いたコードを出力します。</dd>
+		  <dt>-c++</dt><dd>�ʏ��C++�\�[�X���o�͂��܂�(�f�t�H���g)�B</dd>
+		  <dt>-c++-shared</dt><dd>boost::shared_ptr��p�����R�[�h���o�͂��܂�</dd>
+		  <dt>-c++-variant</dt><dd>boost::variant��p�����R�[�h���o�͂��܂��B</dd>
 		  <dt>-c++-stub</dt><dd></dd>
 		  <dt>-c++-shared-stub</dt><dd></dd>
 		  <dt>-c++-variant-stub</dt><dd></dd>
-		  <dt>dot</dt><dd>graphvizのdot形式で継承グラフを出力します。</dd>
+		  <dt>dot</dt><dd>graphviz��dot�`���Ōp���O���t���o�͂��܂��B</dd>
 		</dl>
 
-		<h2>移植について</h2>
+		<h2>�ڐA�ɂ���</h2>
 
-		<p>capella自体を他の言語に移植する場合、内部でboost.graphのトポロジカルソートをしれっと使っていたりするので、グラフライブラリの整備されていない言語だとかなりめんどくさかったりするかもしれません。</p>
+		<p>capella���̂𑼂̌���ɈڐA����ꍇ�A������boost.graph�̃g�|���W�J���\�[�g��������Ǝg���Ă����肷��̂ŁA�O���t���C�u�����̐�������Ă��Ȃ����ꂾ�Ƃ��Ȃ�߂�ǂ����������肷�邩������܂���B</p>
 
-		<h2>終わりに</h2>
+		<h2>�I����</h2>
 
-		<p>結局のところ、デフォルトで使い手にとってしっくりするソースを出力できるとは限らないと思うので、てきとうにジェネレータのコード(capella_generate_cppあたり)を書き換えて使うのがいいと思います。ジェネレータのコードだけならばさほど難しいことはないと思います。</p>
+		<p>���ǂ̂Ƃ���A�f�t�H���g�Ŏg����ɂƂ��Ă������肷��\�[�X���o�͂ł���Ƃ͌���Ȃ��Ǝv���̂ŁA�Ă��Ƃ��ɃW�F�l���[�^�̃R�[�h(capella_generate_cpp������)�����������Ďg���̂������Ǝv���܂��B�W�F�l���[�^�̃R�[�h�����Ȃ�΂��قǓ�����Ƃ͂Ȃ��Ǝv���܂��B</p>
 
 		  </div>
 

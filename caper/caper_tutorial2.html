@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="Shift_JIS"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <title>caper -- LALR(1) パーサジェネレータ</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>caper -- LALR(1) �p�[�T�W�F�l���[�^</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS"/>
     <style type="text/css">
       <!--
 		  @import url("global.css");
@@ -36,9 +36,9 @@
 		<a href="caper_tutorial5.html">Tutorial5</a>
       </div>
       <div id="content">
-		<h1><a name="i0"> </a> tutorial 2 -- hello world γ</h1>
-		<p>次はセマンティックアクションの引数です。</p>
-		<h2><a name="i1"> </a> 文法ファイル</h2>
+		<h1><a name="i0"> </a> tutorial 2 -- hello world ��</h1>
+		<p>���̓Z�}���e�B�b�N�A�N�V�����̈����ł��B</p>
+		<h2><a name="i1"> </a> ���@�t�@�C��</h2>
 <pre>
 %token Hello&lt;std::string&gt; World&lt;std::string&gt;;
 %namespace hello_world;
@@ -46,15 +46,15 @@
 
 HelloWorld&lt;std::string&gt; : [Greet] Hello(0) World(1);
 </pre>
-		<p><code>hello1</code>と違うのは、
+		<p><code>hello1</code>�ƈႤ�̂́A
 		  <ul  class="list1">
-			<li> トークンに型がついている</li>
-			<li> <code>Greet</code>に引数指定がある</li>
+			<li> �g�[�N���Ɍ^�����Ă���</li>
+			<li> <code>Greet</code>�Ɉ����w�肪����</li>
 		  </ul>
-		  の2点です。</p>
-		<p>1行目のトークンに対する型指定によって、caperは<code>Hello</code> =&gt; <code>std::string</code>, <code>World</code> =&gt; <code>std::string</code>という型を認識します。これにより、後の文法でこれらのトークンが出てきた場合、その値の型は関連付けられた型に等しいとみなして処理を行います。</p>
-		<p>5行目では、<code>Greet</code>呼び出し時の引数の指定を行っています。(数値)の部分がそれです。この数値は何番目の引数になるかということをあらわしています。(数値)がついていない記号はセマンティックアクション呼び出し時に用いられません。この定義では、<code>Greet</code>の0番目の引数が<code>Hello</code>に対応する値、1番目の引数が<code>World</code>に対応する値であることを示していることになります。</p>
-		<h2><a name="i2"> </a> 呼び出しファイル</h2>
+		  ��2�_�ł��B</p>
+		<p>1�s�ڂ̃g�[�N���ɑ΂���^�w��ɂ���āAcaper��<code>Hello</code> =&gt; <code>std::string</code>, <code>World</code> =&gt; <code>std::string</code>�Ƃ����^��F�����܂��B����ɂ��A��̕��@�ł����̃g�[�N�����o�Ă����ꍇ�A���̒l�̌^�͊֘A�t����ꂽ�^�ɓ������Ƃ݂Ȃ��ď������s���܂��B</p>
+		<p>5�s�ڂł́A<code>Greet</code>�Ăяo�����̈����̎w����s���Ă��܂��B(���l)�̕���������ł��B���̐��l�͉��Ԗڂ̈����ɂȂ邩�Ƃ������Ƃ�����킵�Ă��܂��B(���l)�����Ă��Ȃ��L���̓Z�}���e�B�b�N�A�N�V�����Ăяo�����ɗp�����܂���B���̒�`�ł́A<code>Greet</code>��0�Ԗڂ̈�����<code>Hello</code>�ɑΉ�����l�A1�Ԗڂ̈�����<code>World</code>�ɑΉ�����l�ł��邱�Ƃ������Ă��邱�ƂɂȂ�܂��B</p>
+		<h2><a name="i2"> </a> �Ăяo���t�@�C��</h2>
 <pre>
 #include &lt;string&gt;
 #include &lt;iostream&gt;
@@ -84,15 +84,15 @@ int main( int, char** )
     return 0;
 }
 </pre>
-		<p>セマンティックアクションが少し複雑になっています。</p>
-		<p>今回導入された<code>&quot;downcast&quot;</code>は、<code>Parser</code>の<code>Value</code>型から各記号の個別の型への安全な変換を提供する関数です。ちょうど<code>upcast</code>の反対の動作を行うためのものです。今回は「値集合全体を表す型」が<code>std::string</code>であり、「個別な型」も<code>std::string</code>しか使われていない(<code>Hello</code>, <code>World</code>, <code>HelloWorld</code>のいずれも<code>std::string</code>型)ので、<code>&quot;void downcast( std::string&amp; x, const std::string&amp; y ) { x = y; }&quot;</code>の一行で終わりです。</p>
-		<p><code>Greet</code>のシグネチャは以下のようになっています。</p>
+		<p>�Z�}���e�B�b�N�A�N�V�������������G�ɂȂ��Ă��܂��B</p>
+		<p>���񓱓����ꂽ<code>&quot;downcast&quot;</code>�́A<code>Parser</code>��<code>Value</code>�^����e�L���̌ʂ̌^�ւ̈��S�ȕϊ���񋟂���֐��ł��B���傤��<code>upcast</code>�̔��΂̓�����s�����߂̂��̂ł��B����́u�l�W���S�̂�\���^�v��<code>std::string</code>�ł���A�u�ʂȌ^�v��<code>std::string</code>�����g���Ă��Ȃ�(<code>Hello</code>, <code>World</code>, <code>HelloWorld</code>�̂������<code>std::string</code>�^)�̂ŁA<code>&quot;void downcast( std::string&amp; x, const std::string&amp; y ) { x = y; }&quot;</code>�̈�s�ŏI���ł��B</p>
+		<p><code>Greet</code>�̃V�O�l�`���͈ȉ��̂悤�ɂȂ��Ă��܂��B</p>
 		<pre>
 std::string Greet( const std::string&amp; x, const std::string&amp; y );
 		</pre>
-		<p>ここでは、文法ファイルで指定したように、<code>x</code>が<code>Hello</code>に関連付けられた値を、<code>y</code>が<code>World</code>に関連付けられた値をそれぞれ表しています。そしてこの関数の戻り値は、パーサによって、<code>HelloWorld</code>に関連付けられることになります。</p>
-		<p>今回の<code>main</code>関数では、トークンを<code>post</code>するときに<code>&quot;Guten Tag, &quot;, &quot;Welt&quot;</code>という値を渡しています。つまり、この値が、<code>HelloWorld</code>受理時に、<code>Hello</code>と<code>World</code>に関連付けられた値として用いられることになるのです。</p>
-		<h2><a name="i3"> </a> 実行</h2>
+		<p>�����ł́A���@�t�@�C���Ŏw�肵���悤�ɁA<code>x</code>��<code>Hello</code>�Ɋ֘A�t����ꂽ�l���A<code>y</code>��<code>World</code>�Ɋ֘A�t����ꂽ�l�����ꂼ��\���Ă��܂��B�����Ă��̊֐��̖߂�l�́A�p�[�T�ɂ���āA<code>HelloWorld</code>�Ɋ֘A�t�����邱�ƂɂȂ�܂��B</p>
+		<p>�����<code>main</code>�֐��ł́A�g�[�N����<code>post</code>����Ƃ���<code>&quot;Guten Tag, &quot;, &quot;Welt&quot;</code>�Ƃ����l��n���Ă��܂��B�܂�A���̒l���A<code>HelloWorld</code>�󗝎��ɁA<code>Hello</code>��<code>World</code>�Ɋ֘A�t����ꂽ�l�Ƃ��ėp�����邱�ƂɂȂ�̂ł��B</p>
+		<h2><a name="i3"> </a> ���s</h2>
 <pre>
 % ./hello2
 Guten Tag, Welt

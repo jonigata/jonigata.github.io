@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="Shift_JIS"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <title>caper -- LALR(1) パーサジェネレータ</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>caper -- LALR(1) �p�[�T�W�F�l���[�^</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS"/>
     <style type="text/css">
       <!--
 		  @import url("global.css");
@@ -36,11 +36,11 @@
 		<a href="caper_tutorial5.html">Tutorial5</a>
       </div>
       <div id="content">
-		<h1><a name="i0"> </a> tutorial 1 -- hello world β</h1>
-		<p>次は規則を受理したときにテキストを表示するようにしてみましょう。</p>
-		<p>セマンティックアクションについての学習です。</p>
+		<h1><a name="i0"> </a> tutorial 1 -- hello world ��</h1>
+		<p>���͋K�����󗝂����Ƃ��Ƀe�L�X�g��\������悤�ɂ��Ă݂܂��傤�B</p>
+		<p>�Z�}���e�B�b�N�A�N�V�����ɂ��Ă̊w�K�ł��B</p>
 
-		<h2><a name="i1"> </a> 文法ファイル</h2>
+		<h2><a name="i1"> </a> ���@�t�@�C��</h2>
 <pre>
 %token Hello World;
 %namespace hello_world;
@@ -48,9 +48,9 @@
 
 HelloWorld&lt;int&gt; : [Greet] Hello World;
 </pre>
-		<p><code>hello0.cpg</code>との違いは、5行目で<code>&quot;[Greet]&quot;</code>とセマンティックアクションが指定されていることだけです。これで、<code>&quot;HelloWorld&quot;</code>規則が受理されたときに、<code>SemanticAction</code>の<code>Greet</code>メンバ関数が呼ばれることになります。</p>
+		<p><code>hello0.cpg</code>�Ƃ̈Ⴂ�́A5�s�ڂ�<code>&quot;[Greet]&quot;</code>�ƃZ�}���e�B�b�N�A�N�V�������w�肳��Ă��邱�Ƃ����ł��B����ŁA<code>&quot;HelloWorld&quot;</code>�K�����󗝂��ꂽ�Ƃ��ɁA<code>SemanticAction</code>��<code>Greet</code>�����o�֐����Ă΂�邱�ƂɂȂ�܂��B</p>
 
-		<h2><a name="i2"> </a> 呼び出しファイル</h2>
+		<h2><a name="i2"> </a> �Ăяo���t�@�C��</h2>
 <pre>
 #include &lt;iostream&gt;
 #include &quot;hello1.hpp&quot;
@@ -79,21 +79,21 @@ int main( int, char** )
         return 0;
 }
 </pre>
-		<p>こちらは、<code>SemanticAction</code>に2行追加されています。</p>
-		<p>7行目の<code>upcast</code>は、各非終端記号の型から、<code>Parser</code>のインスタンス化のときにテンプレートパラメータとして与える「値集合すべてをあらわす型」への変換を提供する関数です。セマンティックアクション関数がひとつでもある場合、安全な型変換のためにこの関数が定義されていなければなりません。</p>
-		<p>この<code>upcast</code>でy→xの変換を定義することになるのですが、今回は文法ファイルで定義した<code>Greet</code>の受理結果を意味する<code>&quot;HelloWorld&quot;</code>の型も、パーサの第1テンプレートパラメータとして指定した値集合全体の型もintですので、<code>&quot;void upcast( int&amp; x, int y ) { x = y; }&quot;</code>の1行で問題ありません。</p>
-		<p>9行目はこのチュートリアルの主目的のセマンティックアクションです。セマンティックアクション関数の引数・戻り値の型は文法規則での定義によります。ここでもう一度<code>HelloWorld</code>の定義を見てみましょう。</p>
+		<p>������́A<code>SemanticAction</code>��2�s�ǉ�����Ă��܂��B</p>
+		<p>7�s�ڂ�<code>upcast</code>�́A�e��I�[�L���̌^����A<code>Parser</code>�̃C���X�^���X���̂Ƃ��Ƀe���v���[�g�p�����[�^�Ƃ��ė^����u�l�W�����ׂĂ�����킷�^�v�ւ̕ϊ���񋟂���֐��ł��B�Z�}���e�B�b�N�A�N�V�����֐����ЂƂł�����ꍇ�A���S�Ȍ^�ϊ��̂��߂ɂ��̊֐�����`����Ă��Ȃ���΂Ȃ�܂���B</p>
+		<p>����<code>upcast</code>��y��x�̕ϊ����`���邱�ƂɂȂ�̂ł����A����͕��@�t�@�C���Œ�`����<code>Greet</code>�̎󗝌��ʂ��Ӗ�����<code>&quot;HelloWorld&quot;</code>�̌^���A�p�[�T�̑�1�e���v���[�g�p�����[�^�Ƃ��Ďw�肵���l�W���S�̂̌^��int�ł��̂ŁA<code>&quot;void upcast( int&amp; x, int y ) { x = y; }&quot;</code>��1�s�Ŗ�肠��܂���B</p>
+		<p>9�s�ڂ͂��̃`���[�g���A���̎�ړI�̃Z�}���e�B�b�N�A�N�V�����ł��B�Z�}���e�B�b�N�A�N�V�����֐��̈����E�߂�l�̌^�͕��@�K���ł̒�`�ɂ��܂��B�����ł�����x<code>HelloWorld</code>�̒�`�����Ă݂܂��傤�B</p>
 <pre>
 HelloWorld&lt;int&gt; : [Greet] Hello World;
 </pre>
-		<p>この定義から、
+		<p>���̒�`����A
 		  <ul>
-			<li>この規則の型(＝セマンティックアクションの戻り値)は<code>HelloWorld&lt;int&gt;</code>で指定したintである</li>
-			<li>引数はない</li>
+			<li>���̋K���̌^(���Z�}���e�B�b�N�A�N�V�����̖߂�l)��<code>HelloWorld&lt;int&gt;</code>�Ŏw�肵��int�ł���</li>
+			<li>�����͂Ȃ�</li>
 		  </ul>
-		  ということが決定されます(引数については後のチュートリアルで説明します)。</p>
-		<h2><a name="i3"> </a> 実行</h2>
-		<p>以上によって、規則受理時に<code>Greet</code>が実行されます。標準出力には<code>&quot;hello world&quot;</code>と出力されるはずです。</p>
+		  �Ƃ������Ƃ����肳��܂�(�����ɂ��Ă͌�̃`���[�g���A���Ő������܂�)�B</p>
+		<h2><a name="i3"> </a> ���s</h2>
+		<p>�ȏ�ɂ���āA�K���󗝎���<code>Greet</code>�����s����܂��B�W���o�͂ɂ�<code>&quot;hello world&quot;</code>�Əo�͂����͂��ł��B</p>
 
       </div>
 

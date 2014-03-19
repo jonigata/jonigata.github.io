@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="Shift_JIS"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <title>caper -- LALR(1) パーサジェネレータ</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>caper -- LALR(1) �p�[�T�W�F�l���[�^</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS"/>
     <style type="text/css">
       <!--
 		  @import url("global.css");
@@ -36,100 +36,100 @@
 		<a href="caper_tutorial5.html">Tutorial5</a>
       </div>
       <div id="content">
-		<h2><a name="i3"> </a>ダウンロード</h2>
+		<h2><a name="i3"> </a>�_�E�����[�h</h2>
 		<p>
-		  最新版 <a href="../../../archives/caper-2009-07-09-1.zip"><code>caper-2009-07-09-1.zip</code></a><br/>
+		  �ŐV�� <a href="../../../archives/caper-2009-07-09-1.zip"><code>caper-2009-07-09-1.zip</code></a><br/>
 		</p>
 		<p>
-		  <a href="http://code.google.com/p/caper/">Google Project(日々更新)</a>
+		  <a href="http://code.google.com/p/caper/">Google Project(���X�X�V)</a>
 		</p>
 
-		<h2><a name="i4"> </a>インストール</h2>
-		<p>いまのところインストーラ等は用意していません。<br/>
-		  linuxでは、解凍後にmakeしてください。サンプルのビルドはexamplesディレクトリでmakeです。</p>
-		<p>windowsでは、中にプロジェクトファイルが入っているのでそれを使ってください(VS2008用)。<br/>
-		  一応実行ファイルも入れておきます。</p>
-		<p>※ビルドにはboostが必要です。使うだけならいりません。</p>
+		<h2><a name="i4"> </a>�C���X�g�[��</h2>
+		<p>���܂̂Ƃ���C���X�g�[�����͗p�ӂ��Ă��܂���B<br/>
+		  linux�ł́A�𓀌��make���Ă��������B�T���v���̃r���h��examples�f�B���N�g����make�ł��B</p>
+		<p>windows�ł́A���Ƀv���W�F�N�g�t�@�C���������Ă���̂ł�����g���Ă�������(VS2008�p)�B<br/>
+		  �ꉞ���s�t�@�C��������Ă����܂��B</p>
+		<p>���r���h�ɂ�boost���K�v�ł��B�g�������Ȃ炢��܂���B</p>
 
-		<h2><a name="i5"> </a>実行方法</h2>
+		<h2><a name="i5"> </a>���s���@</h2>
 <pre>
         % ./caper input_file output_file
 </pre>
-	<p>です。詳しくは<a href="caper_tutorial0.html">Tutorial</a>をご覧ください。</p>
+	<p>�ł��B�ڂ�����<a href="caper_tutorial0.html">Tutorial</a>���������������B</p>
 
-	<p>オプション</p>
+	<p>�I�v�V����</p>
 	<ul>
-	  <li>-c++ C++(デフォルト)</li>
+	  <li>-c++ C++(�f�t�H���g)</li>
 	  <li>-cs C#</li>
 	  <li>-js JavaScript</li>
-	  <li>-d D言語</li>
+	  <li>-d D����</li>
 	</ul>
 
-	<h2><a name="i6"> </a>履歴</h2>
-	<p>2008年10月29日</p>
+	<h2><a name="i6"> </a>����</h2>
+	<p>2008�N10��29��</p>
 	<ul>
-	  <li>※重要※ 9月14日のコードで、異なるルールで同じアクションを指定していたときに誤動作していたのを修正しました。</li>
+	  <li>���d�v�� 9��14���̃R�[�h�ŁA�قȂ郋�[���œ����A�N�V�������w�肵�Ă����Ƃ��Ɍ듮�삵�Ă����̂��C�����܂����B</li>
 	</ul>
-	<p>2008年9月14日</p>
+	<p>2008�N9��14��</p>
 	<ul>
-	  <li>出力コードのインデント等を美しくした</li>
-	  <li>出力コードの重複部分などの無駄を最適化</li>
-	  <li>※重要※ <code>post</code>の返値を 「<code>accept || error</code>」にしました。従ってエラーチェック ( <code>parser.error()</code> ) はループ脱出後に行う必要があります。</li>
+	  <li>�o�̓R�[�h�̃C���f���g�������������</li>
+	  <li>�o�̓R�[�h�̏d�������Ȃǂ̖��ʂ��œK��</li>
+	  <li>���d�v�� <code>post</code>�̕Ԓl�� �u<code>accept || error</code>�v�ɂ��܂����B�]���ăG���[�`�F�b�N ( <code>parser.error()</code> ) �̓��[�v�E�o��ɍs���K�v������܂��B</li>
 	</ul>
-	<p>2008年8月30日</p>
+	<p>2008�N8��30��</p>
 	<ul>
-	  <li>Makefile, VC++のプロジェクトを修正して若干ビルドしやすくした</li>
-	  <li>'leaf'(LLVM用コンパイラの練習)追加。詳しくは<a href="http://d.hatena.ne.jp/jonigata/">日記</a>で</li>
+	  <li>Makefile, VC++�̃v���W�F�N�g���C�����Ď኱�r���h���₷������</li>
+	  <li>'leaf'(LLVM�p�R���p�C���̗��K)�ǉ��B�ڂ�����<a href="http://d.hatena.ne.jp/jonigata/">���L</a>��</li>
 	</ul>
-	<p>2008年8月15日</p>
+	<p>2008�N8��15��</p>
 	<ul>
-	  <li>エラーメッセージに"caper: "を追加(make時にわかりづらかったため)</li>
-	  <li>エラー時に出力ファイルを削除(makeに対応)</li>
-	  <li>インクルードガードの変更(数字を残す、末尾にアンダーバーをつける、Windowsではパスを削除)</li>
+	  <li>�G���[���b�Z�[�W��"caper: "��ǉ�(make���ɂ킩��Â炩��������)</li>
+	  <li>�G���[���ɏo�̓t�@�C�����폜(make�ɑΉ�)</li>
+	  <li>�C���N���[�h�K�[�h�̕ύX(�������c���A�����ɃA���_�[�o�[������AWindows�ł̓p�X���폜)</li>
 	</ul>
-	<p>2008年3月24日(1)</p>
+	<p>2008�N3��24��(1)</p>
 	<ul>
-	  <li>C#版出力コードを修正。boxingを使うようになったのでインターフェイスが変わりました。</li>
+	  <li>C#�ŏo�̓R�[�h���C���Bboxing���g���悤�ɂȂ����̂ŃC���^�[�t�F�C�X���ς��܂����B</li>
 	</ul>
-	<p>2008年3月12日(2)</p>
+	<p>2008�N3��12��(2)</p>
 	<ul>
-	  <li>linuxでコンパイルが通らなくなっていたのを修正。</li>
+	  <li>linux�ŃR���p�C�����ʂ�Ȃ��Ȃ��Ă����̂��C���B</li>
 	</ul>
-	<p>2008年3月12日(1)</p>
+	<p>2008�N3��12��(1)</p>
 	<ul>
-	  <li>ルートから連結していないルールが存在していたときに強制終了していたのを修正。</li>
-	  <li>%access_modifier &lt;identifier&gt;;宣言を追加。C#ジェネレータでParser/ISemanticAction/Tokenにアクセス限定子を付加します。</li>
-	  <li>%namespace宣言で識別子に'.(ピリオド)'を使えるように。C++だと出力コードがだめになる(ピリオドがついたまま出力してしまう)ので注意。</li>
-	  <li>コンパイラをVS2008に変更。</li>
+	  <li>���[�g����A�����Ă��Ȃ����[�������݂��Ă����Ƃ��ɋ����I�����Ă����̂��C���B</li>
+	  <li>%access_modifier &lt;identifier&gt;;�錾��ǉ��BC#�W�F�l���[�^��Parser/ISemanticAction/Token�ɃA�N�Z�X����q��t�����܂��B</li>
+	  <li>%namespace�錾�Ŏ��ʎq��'.(�s���I�h)'���g����悤�ɁBC++���Əo�̓R�[�h�����߂ɂȂ�(�s���I�h�������܂܏o�͂��Ă��܂�)�̂Œ��ӁB</li>
+	  <li>�R���p�C����VS2008�ɕύX�B</li>
 	</ul>
-	<p>2008年2月16日</p>
+	<p>2008�N2��16��</p>
 	<ul>
-	  <li>C#、Dのジェネレータを搭載(undocumented)。-cs, -dオプションで。
+	  <li>C#�AD�̃W�F�l���[�^�𓋍�(undocumented)�B-cs, -d�I�v�V�����ŁB
 		<ul>
-		  <li>C# 主にcolilicaさん</li>
-		  <li>D ytqwertyさん</li>
+		  <li>C# ���colilica����</li>
+		  <li>D ytqwerty����</li>
 		</ul>
 		thx!
 	  </li>
-	  <li>JavaScriptジェネレータでセマンティックアクションに渡される引数が無意味なデータだったのを修正。</li>
-	  <li>token_prefixで識別子を省略する(%token_prefix;とする)ことでトークン前置詞を削除可能にした。</li>
+	  <li>JavaScript�W�F�l���[�^�ŃZ�}���e�B�b�N�A�N�V�����ɓn�������������Ӗ��ȃf�[�^�������̂��C���B</li>
+	  <li>token_prefix�Ŏ��ʎq���ȗ�����(%token_prefix;�Ƃ���)���ƂŃg�[�N���O�u�����폜�\�ɂ����B</li>
 	</ul>
-		<p>2006年10月30日</p>
+		<p>2006�N10��30��</p>
 		<ul>
-		  <li>高速版LALR(1)エンジン搭載。</li>
+		  <li>������LALR(1)�G���W�����ځB</li>
 		</ul>
-		<p>2006年10月22日</p>
+		<p>2006�N10��22��</p>
 		<ul>
-		  <li>JavaScriptジェネレータ追加</li>
-		  <li>ソース分割</li>
+		  <li>JavaScript�W�F�l���[�^�ǉ�</li>
+		  <li>�\�[�X����</li>
 		</ul>
-		<p>2006年10月19日</p>
+		<p>2006�N10��19��</p>
 		<ul>
-		  <li>同じ内容の規則があるとエラーにするようにした。</li>
-		  <li>ルートからつながってない規則があるとエラーにするようにした。</li>
-		  <li>exeファイルがランタイムを必要としていたのを修正。</li>
+		  <li>�������e�̋K��������ƃG���[�ɂ���悤�ɂ����B</li>
+		  <li>���[�g����Ȃ����ĂȂ��K��������ƃG���[�ɂ���悤�ɂ����B</li>
+		  <li>exe�t�@�C���������^�C����K�v�Ƃ��Ă����̂��C���B</li>
 		</ul>
-		<p>2006年10月19日より前 --- 忘れた</p>
+		<p>2006�N10��19�����O --- �Y�ꂽ</p>
 
       </div>
       <div id="footer">Content &copy; 2006-2008 Naoyuki HIRAYAMA</div>

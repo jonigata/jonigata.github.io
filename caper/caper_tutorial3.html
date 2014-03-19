@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="Shift_JIS"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <title>caper -- LALR(1) パーサジェネレータ</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>caper -- LALR(1) �p�[�T�W�F�l���[�^</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS"/>
     <style type="text/css">
 	  <!--
 		  @import url("global.css");
@@ -36,10 +36,10 @@
 		<a href="caper_tutorial5.html">Tutorial5</a>
 	  </div>
 	  <div id="content">
-		<h1><a name="i0"> </a> tutorial 3 -- 電卓 α</h1>
-		<p>次は演算を含むサンプルです。</p>
+		<h1><a name="i0"> </a> tutorial 3 -- �d�� ��</h1>
+		<p>���͉��Z���܂ރT���v���ł��B</p>
 
-		<h2><a name="i1"> </a> 文法ファイル</h2>
+		<h2><a name="i1"> </a> ���@�t�@�C��</h2>
 <pre>
 %token Number&lt;int&gt; Add Sub Mul Div;
 %namespace calc;
@@ -55,9 +55,9 @@ Term&lt;int&gt; : [Identity] Number(0)
           | [MakeDiv] Term(0) Div Number(1)
           ;
 </pre>
-		  <p>BNFを使った経験があれば、見た目でおおよそわかると思います。前述のように、規則の中で(数値)が後ろにつかない要素は、トークン種別だけが重要で、セマンティックアクションでは用いられないことを意味しています。</p>
+		  <p>BNF���g�����o��������΁A�����ڂł����悻�킩��Ǝv���܂��B�O�q�̂悤�ɁA�K���̒���(���l)�����ɂ��Ȃ��v�f�́A�g�[�N����ʂ������d�v�ŁA�Z�}���e�B�b�N�A�N�V�����ł͗p�����Ȃ����Ƃ��Ӗ����Ă��܂��B</p>
 
-		  <h2><a name="i2"> </a> 操作ファイル</h2>
+		  <h2><a name="i2"> </a> ����t�@�C��</h2>
 <pre>
 #include &quot;calc0.hpp&quot;
 #include &lt;iostream&gt;
@@ -79,7 +79,7 @@ public:
                         c = getc();
                 } while( isspace( c ) );
 
-                // 記号類
+                // �L����
                 switch( c ) {
                 case '+': return calc::token_Add;
                 case '-': return calc::token_Sub;
@@ -88,7 +88,7 @@ public:
                 case EOF: return calc::token_eof;
                 }
 
-                // 整数
+                // ����
                 if( isdigit( c ) ) {
                         int n = 0;
                         while( c != EOF &amp;&amp; isdigit( c ) ) {
@@ -167,7 +167,7 @@ struct SemanticAction {
 
 int main( int, char** )
 {
-        // スキャナ
+        // �X�L���i
         typedef std::istreambuf_iterator&lt;char&gt; is_iterator;
         is_iterator b( std::cin );
         is_iterator e;
@@ -194,17 +194,17 @@ int main( int, char** )
 }
 </pre>
 
-		<p>今回はスキャナが必要なので、手書きのスキャナを用意しました。難しいことはしていないので、内容に関してはソースを読んでください。手書きが面倒ならば、いまどきは<code>boost::regex</code>を使うなど色々な方法があると思います。</p>
-		<p>セマンティックアクションでは、新しい要素は登場していません。</p>
-		<p><code>main</code>関数では、以下の新しい要素が導入されています。</p>
+		<p>����̓X�L���i���K�v�Ȃ̂ŁA�菑���̃X�L���i��p�ӂ��܂����B������Ƃ͂��Ă��Ȃ��̂ŁA���e�Ɋւ��Ă̓\�[�X��ǂ�ł��������B�菑�����ʓ|�Ȃ�΁A���܂ǂ���<code>boost::regex</code>���g���ȂǐF�X�ȕ��@������Ǝv���܂��B</p>
+		<p>�Z�}���e�B�b�N�A�N�V�����ł́A�V�����v�f�͓o�ꂵ�Ă��܂���B</p>
+		<p><code>main</code>�֐��ł́A�ȉ��̐V�����v�f����������Ă��܂��B</p>
 
-		<h4><a name="i3"> </a> <code>parser.post</code>の戻り値</h4>
-		<p>全体を受理したとき、もしくはエラーを検出したときには<code>true</code>を、まだ受理が終わってない場合には<code>false</code>を返します。</p>
-		<h4><a name="i4"> </a> <code>parser.accept</code>の戻り値</h4>
-		<p><code>parser.accept</code>は<code>parser.post</code>が<code>true</code>を返して後でだけ有効です。errorの場合は<code>v</code>は不定になり、<code>false</code>が帰ります。正常終了の場合は<code>v</code>にルート文法の左辺に関連付けられた値が代入され、<code>true</code>を返します。</p>
-		<p>yacc等を使った経験があれば、特に難しいことはないと思います。</p>
+		<h4><a name="i3"> </a> <code>parser.post</code>�̖߂�l</h4>
+		<p>�S�̂��󗝂����Ƃ��A�������̓G���[�����o�����Ƃ��ɂ�<code>true</code>���A�܂��󗝂��I����ĂȂ��ꍇ�ɂ�<code>false</code>��Ԃ��܂��B</p>
+		<h4><a name="i4"> </a> <code>parser.accept</code>�̖߂�l</h4>
+		<p><code>parser.accept</code>��<code>parser.post</code>��<code>true</code>��Ԃ��Č�ł����L���ł��Berror�̏ꍇ��<code>v</code>�͕s��ɂȂ�A<code>false</code>���A��܂��B����I���̏ꍇ��<code>v</code>�Ƀ��[�g���@�̍��ӂɊ֘A�t����ꂽ�l���������A<code>true</code>��Ԃ��܂��B</p>
+		<p>yacc�����g�����o��������΁A���ɓ�����Ƃ͂Ȃ��Ǝv���܂��B</p>
 
-		<h2><a name="i5"> </a> 実行</h2>
+		<h2><a name="i5"> </a> ���s</h2>
 <pre>
 % ./calc0
 8+3*7

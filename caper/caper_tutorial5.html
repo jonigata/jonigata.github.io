@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="Shift_JIS"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <title>caper -- LALR(1) ãƒ‘ãƒ¼ã‚µã‚¸ã‚§ãƒãƒ¬ãƒ¼ã‚¿</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>caper -- LALR(1) ƒp[ƒTƒWƒFƒlƒŒ[ƒ^</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS"/>
     <style type="text/css">
 	  <!--
 		  @import url("global.css");
@@ -37,12 +37,12 @@
 	  </div>
 	  <div id="content">
 
-		<h1><a name="i0"> </a> tutorial 5 -- é›»å“ Î³</h1>
-		<p>æ¬¡ã®ã‚µãƒ³ãƒ—ãƒ«ã¯ã€ASTã«<code>boost::variant</code>ã‚’ä½¿ã†ä¾‹ã§ã™ã€‚é–¢æ•°å‹è¨€èªã£ã½ã„ãƒ—ãƒ­ã‚°ãƒ©ãƒ ãŒçµ„ã‚ã¾ã™ã€‚(<code>boost::apply_visitor</code>ãŒocamlç­‰ã®ãƒ‘ã‚¿ãƒ¼ãƒ³ãƒãƒƒãƒã«ä¼¼ã¦ã„ã‚‹)</p>
+		<h1><a name="i0"> </a> tutorial 5 -- “d‘ì ƒÁ</h1>
+		<p>Ÿ‚ÌƒTƒ“ƒvƒ‹‚ÍAAST‚É<code>boost::variant</code>‚ğg‚¤—á‚Å‚·BŠÖ”Œ^Œ¾Œê‚Á‚Û‚¢ƒvƒƒOƒ‰ƒ€‚ª‘g‚ß‚Ü‚·B(<code>boost::apply_visitor</code>‚ªocaml“™‚Ìƒpƒ^[ƒ“ƒ}ƒbƒ`‚É—‚Ä‚¢‚é)</p>
 
-		<p>çµæ§‹å¼·çƒˆã§ã™ã€‚ã‚³ãƒ³ãƒ‘ã‚¤ãƒ«æ™‚é–“ã®é•·ã•ã¨ã‚³ãƒ³ãƒ‘ã‚¤ãƒ«ã‚¨ãƒ©ãƒ¼ã®ã‚ã‹ã‚Šã¥ã‚‰ã•ã‚‚å¼·çƒˆã§ã™ãŒâ€¦â€¦</p>
+		<p>Œ‹\‹­—ó‚Å‚·BƒRƒ“ƒpƒCƒ‹ŠÔ‚Ì’·‚³‚ÆƒRƒ“ƒpƒCƒ‹ƒGƒ‰[‚Ì‚í‚©‚è‚Ã‚ç‚³‚à‹­—ó‚Å‚·‚ªcc</p>
 
-		<h2><a name="i1"> </a> ASTãƒ•ã‚¡ã‚¤ãƒ«</h2>
+		<h2><a name="i1"> </a> ASTƒtƒ@ƒCƒ‹</h2>
 <pre>
 #include &lt;boost/variant.hpp&gt;
 #include &lt;iostream&gt;
@@ -83,10 +83,10 @@ struct BinOpExpr {
                 : lhs( x ), rhs( y ) {}
 };
 </pre>
-        <p>(å‡ºåŠ›ç”¨é–¢æ•°ã¯çœç•¥)</p>
-        <p><code>calc1</code>ã¨ç­‰ä¾¡ã®ã‚‚ã®ã«ã—ã‚ˆã†ã¨ã™ã‚‹ã¨ã€å¤§ä½“ã“ã®ã‚ˆã†ã«ãªã‚Šã¾ã™ã€‚</p>
+        <p>(o—Í—pŠÖ”‚ÍÈ—ª)</p>
+        <p><code>calc1</code>‚Æ“™‰¿‚Ì‚à‚Ì‚É‚µ‚æ‚¤‚Æ‚·‚é‚ÆA‘å‘Ì‚±‚Ì‚æ‚¤‚É‚È‚è‚Ü‚·B</p>
 
-        <h2><a name="i2"> </a> æ–‡æ³•ãƒ•ã‚¡ã‚¤ãƒ«</h2>
+        <h2><a name="i2"> </a> •¶–@ƒtƒ@ƒCƒ‹</h2>
 <pre>
 %token Number&lt;int&gt; Add Sub Mul Div;
 %namespace calc;
@@ -102,15 +102,15 @@ Term&lt;Term&gt; : [MakeTerm] Number(0)
            | [MakeDiv] Term(0) Div Number(1)
            ;
 </pre>
-        <p>ã“ã‚Œã‚‚ã»ã¨ã‚“ã©ä»£ã‚ã‚Šã¾ã›ã‚“ãŒã€<code>Number/Term/Expr</code>ã®å‹ã¯</p>
+        <p>‚±‚ê‚à‚Ù‚Æ‚ñ‚Ç‘ã‚í‚è‚Ü‚¹‚ñ‚ªA<code>Number/Term/Expr</code>‚ÌŒ^‚Í</p>
 <pre>
 Number&lt;int&gt;
 Term&lt;Term&gt;
 Expr&lt;Expr&gt;
 </pre>
-        <p>ã¨ã€ã©ã‚Œã‚‚ãƒã‚¤ãƒ³ã‚¿å‹ã§ã¯ãªããªã‚Šã¾ã—ãŸã€‚ä»Šå›ã®ãƒ—ãƒ­ã‚°ãƒ©ãƒ ã¯ãƒ¡ãƒ¢ãƒªãƒªãƒ¼ã‚¯ã—ã¾ã›ã‚“ã€‚</p>
+        <p>‚ÆA‚Ç‚ê‚àƒ|ƒCƒ“ƒ^Œ^‚Å‚Í‚È‚­‚È‚è‚Ü‚µ‚½B¡‰ñ‚ÌƒvƒƒOƒ‰ƒ€‚Íƒƒ‚ƒŠƒŠ[ƒN‚µ‚Ü‚¹‚ñB</p>
 
-        <h2><a name="i3"> </a> æ“ä½œãƒ•ã‚¡ã‚¤ãƒ«</h2>
+        <h2><a name="i3"> </a> ‘€ìƒtƒ@ƒCƒ‹</h2>
 <pre>
 #include &quot;calc2.hpp&quot;
 #include &lt;iostream&gt;
@@ -134,7 +134,7 @@ public:
                         c = getc();
                 } while( isspace( c ) );
 
-                // è¨˜å·é¡
+                // ‹L†—Ş
                 switch( c ) {
                 case '+': return calc::token_Add;
                 case '-': return calc::token_Sub;
@@ -143,7 +143,7 @@ public:
                 case EOF: return calc::token_eof;
                 }
 
-                // æ•´æ•°
+                // ®”
                 if( isdigit( c ) ) {
                         int n = 0;
                         while( c != EOF &amp;&amp; isdigit( c ) ) {
@@ -266,7 +266,7 @@ struct calculator : public boost::static_visitor&lt;int&gt; {
 
 int main( int, char** )
 {
-        // ã‚¹ã‚­ãƒ£ãƒŠ
+        // ƒXƒLƒƒƒi
         typedef std::istreambuf_iterator&lt;char&gt; is_iterator;
         is_iterator b( std::cin );
         is_iterator e;
@@ -293,13 +293,13 @@ int main( int, char** )
         return 0;
 }
 </pre>
-        <p>ã¾ãšã€ä»¥ä¸‹ã®ã‚ˆã†ã«ã€ã™ã¹ã¦ã®å€¤ã‚’æ ¼ç´ã§ãã‚‹å‹ã‚’å®šç¾©ã—ã¾ã™ã€‚</p>
+        <p>‚Ü‚¸AˆÈ‰º‚Ì‚æ‚¤‚ÉA‚·‚×‚Ä‚Ì’l‚ğŠi”[‚Å‚«‚éŒ^‚ğ’è‹`‚µ‚Ü‚·B</p>
 <pre>
 boost::variant&lt; int, Term, Expr &gt; Value;
 </pre>
-        <p>ã“ã‚Œã‚’ã‚¹ã‚­ãƒ£ãƒŠã®æˆ»ã‚Šå€¤ã‚„ãƒ‘ãƒ¼ã‚µã®ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã¨ã—ã¦ç”¨ã„ã¾ã™ã€‚ä»Šå›ã¯æ–‡æ³•è¦ç´ ã®ã¨ã‚Šã†ã‚‹å€¤ãŒ3ç¨®é¡ã—ã‹ãªã„ã®ã§<code>variant</code>ã‚’ä½¿ã£ã¦ã„ã¾ã™ãŒã€ã‚ˆã‚Šå¤§ããªæ–‡æ³•ã§ã¯<code>variant</code>ã®ä¸Šé™ã«ã²ã£ã‹ã‹ã‚‹å¯èƒ½æ€§ãŒã‚ã‚‹ã®ã§ã€<code>boost::any</code>ã‚’ä½¿ã†ã“ã¨ã«ãªã‚‹ã‹ã‚‚ã—ã‚Œã¾ã›ã‚“ã€‚</p>
-        <p>(<code>calc2_ast.hpp</code>ã§ä½¿ã£ã¦ã„ã‚‹<code>variant</code>ã¨ã¯ã¾ã£ãŸãåˆ¥ã®è©±ãªã®ã§ã€æ³¨æ„ã—ã¦ãã ã•ã„ã€‚)</p>
-        <p>æ¬¡ã«ã‚»ãƒãƒ³ãƒ†ã‚£ãƒƒã‚¯ã‚¢ã‚¯ã‚·ãƒ§ãƒ³ã§ã™ã€‚ãŠãŠã‚€ã­è‡ªæ˜ã ã¨æ€ã„ã¾ã™ãŒã€<code>downcast</code>ãƒ»<code>upcast</code>ã¯å°‘ã—æ³¨æ„ãŒå¿…è¦ã§ã™ã€‚<code>boost::variant</code>ã®ä»•æ§˜ã«ã‚ã‚ã›ã¦ä»¥ä¸‹ã®ã‚ˆã†ã«ã™ã‚‹å¿…è¦ãŒã‚ã‚Šã¾ã™ã€‚</p>
+        <p>‚±‚ê‚ğƒXƒLƒƒƒi‚Ì–ß‚è’l‚âƒp[ƒT‚Ìƒeƒ“ƒvƒŒ[ƒgƒpƒ‰ƒ[ƒ^‚Æ‚µ‚Ä—p‚¢‚Ü‚·B¡‰ñ‚Í•¶–@—v‘f‚Ì‚Æ‚è‚¤‚é’l‚ª3í—Ş‚µ‚©‚È‚¢‚Ì‚Å<code>variant</code>‚ğg‚Á‚Ä‚¢‚Ü‚·‚ªA‚æ‚è‘å‚«‚È•¶–@‚Å‚Í<code>variant</code>‚ÌãŒÀ‚É‚Ğ‚Á‚©‚©‚é‰Â”\«‚ª‚ ‚é‚Ì‚ÅA<code>boost::any</code>‚ğg‚¤‚±‚Æ‚É‚È‚é‚©‚à‚µ‚ê‚Ü‚¹‚ñB</p>
+        <p>(<code>calc2_ast.hpp</code>‚Åg‚Á‚Ä‚¢‚é<code>variant</code>‚Æ‚Í‚Ü‚Á‚½‚­•Ê‚Ì˜b‚È‚Ì‚ÅA’ˆÓ‚µ‚Ä‚­‚¾‚³‚¢B)</p>
+        <p>Ÿ‚ÉƒZƒ}ƒ“ƒeƒBƒbƒNƒAƒNƒVƒ‡ƒ“‚Å‚·B‚¨‚¨‚Ş‚Ë©–¾‚¾‚Æv‚¢‚Ü‚·‚ªA<code>downcast</code>E<code>upcast</code>‚Í­‚µ’ˆÓ‚ª•K—v‚Å‚·B<code>boost::variant</code>‚Ìd—l‚É‚ ‚í‚¹‚ÄˆÈ‰º‚Ì‚æ‚¤‚É‚·‚é•K—v‚ª‚ ‚è‚Ü‚·B</p>
 <pre>
 template &lt; class T &gt;
 void downcast( T&amp; x, Value y ) { x = boost::get&lt;T&gt;( y ); }
@@ -307,7 +307,7 @@ void downcast( T&amp; x, Value y ) { x = boost::get&lt;T&gt;( y ); }
 template &lt; class T &gt;
 void upcast( Value&amp; x, const T&amp; y ) { x = y; }
 </pre>
-        <p>ãƒ‘ãƒ¼ã‚µã¨ã¯ç„¡é–¢ä¿‚ã§ã™ãŒã€ASTã‚’èµ°æŸ»ã™ã‚‹è¨ˆç®—æ©Ÿã¯ä»¥ä¸‹ã®ã‚ˆã†ã«ä½œã‚Šã¾ã™ã€‚</p>
+        <p>ƒp[ƒT‚Æ‚Í–³ŠÖŒW‚Å‚·‚ªAAST‚ğ‘–¸‚·‚éŒvZ‹@‚ÍˆÈ‰º‚Ì‚æ‚¤‚Éì‚è‚Ü‚·B</p>
 <pre>
 struct calculator : public boost::static_visitor&lt;int&gt; {
         int operator()( int n ) const  { return n; }
@@ -347,8 +347,8 @@ struct calculator : public boost::static_visitor&lt;int&gt; {
         }
 };
 </pre>
-        <p>ãƒ€ãƒ–ãƒ«ãƒ‡ã‚£ã‚¹ãƒ‘ãƒƒãƒã‚‚ã§ãã‚‹ã‚ˆã†ã§ã€ocamlç­‰ã®<code>match</code>ã»ã©ã§ã¯ãªã„ã§ã™ãŒã€ãªã‹ãªã‹ã™ã”ã„ã“ã¨ã«ãªã£ã¦ã¾ã™ã€‚</p>
-        <p>è©³ã—ãã¯<code>boost::variant</code>ã®ãƒ‰ã‚­ãƒ¥ãƒ¡ãƒ³ãƒˆã‚’ã”è¦§ãã ã•ã„ã€‚</p>
+        <p>ƒ_ƒuƒ‹ƒfƒBƒXƒpƒbƒ`‚à‚Å‚«‚é‚æ‚¤‚ÅAocaml“™‚Ì<code>match</code>‚Ù‚Ç‚Å‚Í‚È‚¢‚Å‚·‚ªA‚È‚©‚È‚©‚·‚²‚¢‚±‚Æ‚É‚È‚Á‚Ä‚Ü‚·B</p>
+        <p>Ú‚µ‚­‚Í<code>boost::variant</code>‚ÌƒhƒLƒ…ƒƒ“ƒg‚ğ‚²——‚­‚¾‚³‚¢B</p>
 
       </div>
 

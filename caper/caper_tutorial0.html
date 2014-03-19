@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="Shift_JIS"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <title>caper -- LALR(1) パーサジェネレータ</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>caper -- LALR(1) �p�[�T�W�F�l���[�^</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS"/>
     <style type="text/css">
       <!--
 		  @import url("global.css");
@@ -36,14 +36,14 @@
 		<a href="caper_tutorial5.html">Tutorial5</a>
       </div>
       <div id="content">
-		<h1><a name="i0"> </a> tutorial 0 -- hello world α</h1>
+		<h1><a name="i0"> </a> tutorial 0 -- hello world ��</h1>
 		<p>
-		  このチュートリアルは、yaccなどでBNFを扱ったことがある人を対象にしています。</p>
+		  ���̃`���[�g���A���́Ayacc�Ȃǂ�BNF�����������Ƃ�����l��Ώۂɂ��Ă��܂��B</p>
 		<p>
-		  まずはhello worldです。</p>
-		<h2><a name="i1"> </a> 入力文法ファイル</h2>
+		  �܂���hello world�ł��B</p>
+		<h2><a name="i1"> </a> ���͕��@�t�@�C��</h2>
 		<p>
-		  以下のような入力文法ファイルを作成し、<code>hello0.cpg</code>というファイル名で保存します。入力文法ファイル1つがパーサひとつに対応します。</p>
+		  �ȉ��̂悤�ȓ��͕��@�t�@�C�����쐬���A<code>hello0.cpg</code>�Ƃ����t�@�C�����ŕۑ����܂��B���͕��@�t�@�C��1���p�[�T�ЂƂɑΉ����܂��B</p>
 <pre>
 %token Hello World;
 %namespace hello_world;
@@ -51,47 +51,47 @@
 
 HelloWorld&lt;int&gt; : [] Hello World;
 </pre>
-		<h4>1行目</h4>
-		<p>この文法で作るパーサで使うトークンを定義しています。この宣言からは、</p>
+		<h4>1�s��</h4>
+		<p>���̕��@�ō��p�[�T�Ŏg���g�[�N�����`���Ă��܂��B���̐錾����́A</p>
 <pre>
 enum Token {
      token_Hello,
      token_World,
 };
 </pre>
-		<p>という<code>enum</code>宣言が出力され、トークン種別として扱われます。<sup>*1</sup></p>
+		<p>�Ƃ���<code>enum</code>�錾���o�͂���A�g�[�N����ʂƂ��Ĉ����܂��B<sup>*1</sup></p>
 
-		<h4>2行目</h4>
-		<p>namespace名を宣言しています。出力されるヘッダ全体がこのnamespaceで囲まれます。指定しない場合、<code>&quot;caper_parser&quot;</code>というnamespace名が用いられます。</p>
-		<h4>3行目</h4>
-		<p>パーサの内部スタックにSTLを用いない(配列を用いる)ことを宣言します。配列を使う場合、メモリの動的な確保がなくなる代わりに、スタック長に制限がかかります。</p>
-		<h4>5行目</h4>
-		<p>BNFによる文法定義です。</p>
-		<p>文法は文法規則の集合で、文法規則は以下のような形で指定します。</p>
+		<h4>2�s��</h4>
+		<p>namespace����錾���Ă��܂��B�o�͂����w�b�_�S�̂�����namespace�ň͂܂�܂��B�w�肵�Ȃ��ꍇ�A<code>&quot;caper_parser&quot;</code>�Ƃ���namespace�����p�����܂��B</p>
+		<h4>3�s��</h4>
+		<p>�p�[�T�̓����X�^�b�N��STL��p���Ȃ�(�z���p����)���Ƃ�錾���܂��B�z����g���ꍇ�A�������̓��I�Ȋm�ۂ��Ȃ��Ȃ����ɁA�X�^�b�N���ɐ�����������܂��B</p>
+		<h4>5�s��</h4>
+		<p>BNF�ɂ�镶�@��`�ł��B</p>
+		<p>���@�͕��@�K���̏W���ŁA���@�K���͈ȉ��̂悤�Ȍ`�Ŏw�肵�܂��B</p>
 <pre>
-非終端記号名&lt;非終端記号の型&gt; : [セマンティックアクション名]
-                             | [セマンティックアクション名] 項
-                             | [セマンティックアクション名] 項 項
+��I�[�L����&lt;��I�[�L���̌^&gt; : [�Z�}���e�B�b�N�A�N�V������]
+                             | [�Z�}���e�B�b�N�A�N�V������] ��
+                             | [�Z�}���e�B�b�N�A�N�V������] �� ��
                             ...
                              ;
 </pre>
 
-		<p>記号類は多少異なりますが、意味は通常のBNFと同様です。caper独特な部分については後のチュートリアルで説明します。</p>
-		<p>今回の文法は、<code>'hello' 'world'</code>の順でトークンが来ると受理する単純なものです。</p>
-		<p>先頭の文法がルート文法になります。</p>
+		<p>�L���ނ͑����قȂ�܂����A�Ӗ��͒ʏ��BNF�Ɠ��l�ł��Bcaper�Ɠ��ȕ����ɂ��Ă͌�̃`���[�g���A���Ő������܂��B</p>
+		<p>����̕��@�́A<code>'hello' 'world'</code>�̏��Ńg�[�N��������Ǝ󗝂���P���Ȃ��̂ł��B</p>
+		<p>�擪�̕��@�����[�g���@�ɂȂ�܂��B</p>
 
-		<p><hr/><small>*1</small> %external_token;という宣言を別の行で与えると、このenum定義は出力されず、後で説明するParserクラスがToken型をテンプレートパラメータとして必要とするようになります。Token型を別のファイルで定義したいときに使ってください。</p>
+		<p><hr/><small>*1</small> %external_token;�Ƃ����錾��ʂ̍s�ŗ^����ƁA����enum��`�͏o�͂��ꂸ�A��Ő�������Parser�N���X��Token�^���e���v���[�g�p�����[�^�Ƃ��ĕK�v�Ƃ���悤�ɂȂ�܂��BToken�^��ʂ̃t�@�C���Œ�`�������Ƃ��Ɏg���Ă��������B</p>
 
-		<h2><a name="i2"> </a> caperでパーサを生成</h2>
+		<h2><a name="i2"> </a> caper�Ńp�[�T�𐶐�</h2>
 		<p>
-		  上記の文法からパーサ(.hppファイル)を生成するには、コマンドラインから</p>
+		  ��L�̕��@����p�[�T(.hpp�t�@�C��)�𐶐�����ɂ́A�R�}���h���C������</p>
 <pre>
 % caper hello0.cpg hello0.hpp
 </pre>
 		<p>
-		  とします。</p>
+		  �Ƃ��܂��B</p>
 		<p>
-		  すると、</p>
+		  ����ƁA</p>
 <pre>
 #ifndef HELLO_WORLD_HPP
 #define HELLO_WORLD_HPP
@@ -123,11 +123,11 @@ public:
 
 #endif // #ifndef HELLO_WORLD_HPP
 </pre>
-		<p>だいたいこのようなパーサが出力されます。(見易さのため実装は省略)</p>
+		<p>�����������̂悤�ȃp�[�T���o�͂���܂��B(���Ղ��̂��ߎ����͏ȗ�)</p>
 
-		<h2><a name="i3"> </a> パーサを自分のプログラムから使う</h2>
+		<h2><a name="i3"> </a> �p�[�T�������̃v���O��������g��</h2>
 		<p>
-		  上で出力されたパーサをメインプログラムから使うコードの例です。</p>
+		  ��ŏo�͂��ꂽ�p�[�T�����C���v���O��������g���R�[�h�̗�ł��B</p>
 <pre>
 #include &lt;iostream&gt;
 #include &quot;hello0.hpp&quot;
@@ -149,24 +149,24 @@ int main( int, char** )
         return 0;
 }
 </pre>
-		<h4><a name="i4"> </a> 2行目</h4>
+		<h4><a name="i4"> </a> 2�s��</h4>
 		<p>
-		  生成したパーサをincludeしています。</p>
-		<h4><a name="i5"> </a> 4〜7行目</h4>
+		  ���������p�[�T��include���Ă��܂��B</p>
+		<h4><a name="i5"> </a> 4�`7�s��</h4>
 		<p>
-		  セマンティックアクションハンドラを定義しています。この構造体は、テンプレートパラメータの形でパーサに渡されます。<code>class</code>でも構いません。今回は文法ファイルでセマンティックアクションを定義しませんでしたが、その場合でも文法エラーハンドラは必要なので、<code>void syntax_error(){}</code>の定義は必要になります。<code>syntax_error</code>の内部では必要がなければ特に何もしなくても構いません。stack_overflowも同様に必要です。</p>
-		<h4><a name="i6"> </a> 11行目</h4>
+		  �Z�}���e�B�b�N�A�N�V�����n���h�����`���Ă��܂��B���̍\���̂́A�e���v���[�g�p�����[�^�̌`�Ńp�[�T�ɓn����܂��B<code>class</code>�ł��\���܂���B����͕��@�t�@�C���ŃZ�}���e�B�b�N�A�N�V�������`���܂���ł������A���̏ꍇ�ł����@�G���[�n���h���͕K�v�Ȃ̂ŁA<code>void syntax_error(){}</code>�̒�`�͕K�v�ɂȂ�܂��B<code>syntax_error</code>�̓����ł͕K�v���Ȃ���Γ��ɉ������Ȃ��Ă��\���܂���Bstack_overflow�����l�ɕK�v�ł��B</p>
+		<h4><a name="i6"> </a> 11�s��</h4>
 		<p>
-		  パーサインスタンスを生成しています。トークンに関連付けられる値の型は、第1テンプレート引数の<code>&quot;int&quot;</code>です。コンストラクト時に、10行目で生成したセマンティックアクションハンドラを引数として渡しています。</p>
-		<p>ここでは、Parserクラステンプレートの第3引数'StackSize'を省略しています。第3引数は整数で、デフォルト値は「STL使用」なら0、「STL不使用」なら'適当な数値'(1024)になっています。「STL使用」のときに'StackSize'を0にすると、決してオーバーフローしません(メモリがなくなった時点でメモリ割り当て失敗の例外が発生するでしょう)。</P>
-		<h4><a name="i7"> </a> 12〜14行目</h4>
+		  �p�[�T�C���X�^���X�𐶐����Ă��܂��B�g�[�N���Ɋ֘A�t������l�̌^�́A��1�e���v���[�g������<code>&quot;int&quot;</code>�ł��B�R���X�g���N�g���ɁA10�s�ڂŐ��������Z�}���e�B�b�N�A�N�V�����n���h���������Ƃ��ēn���Ă��܂��B</p>
+		<p>�����ł́AParser�N���X�e���v���[�g�̑�3����'StackSize'���ȗ����Ă��܂��B��3�����͐����ŁA�f�t�H���g�l�́uSTL�g�p�v�Ȃ�0�A�uSTL�s�g�p�v�Ȃ�'�K���Ȑ��l'(1024)�ɂȂ��Ă��܂��B�uSTL�g�p�v�̂Ƃ���'StackSize'��0�ɂ���ƁA�����ăI�[�o�[�t���[���܂���(���������Ȃ��Ȃ������_�Ń��������蓖�Ď��s�̗�O����������ł��傤)�B</P>
+		<h4><a name="i7"> </a> 12�`14�s��</h4>
 		<p>
-		  パーサにトークンを与えています。14行目が終了した時点で受理が完了しますが、今回は受理しても何もしないので何もおこりません。</p>
-		<h2><a name="i8"> </a> 実行</h2>
+		  �p�[�T�Ƀg�[�N����^���Ă��܂��B14�s�ڂ��I���������_�Ŏ󗝂��������܂����A����͎󗝂��Ă��������Ȃ��̂ŉ���������܂���B</p>
+		<h2><a name="i8"> </a> ���s</h2>
 		<p>
-		  というわけで、今回は実行してもただ受理するだけで何も出力しません。</p>
+		  �Ƃ����킯�ŁA����͎��s���Ă������󗝂��邾���ŉ����o�͂��܂���B</p>
 		<p>
-		  以上がcaperの出力するパーサの基本的な機能です。</p>
+		  �ȏオcaper�̏o�͂���p�[�T�̊�{�I�ȋ@�\�ł��B</p>
       </div>
 
       <div id="footer">Content &copy; 2006-2008 Naoyuki HIRAYAMA</div>
