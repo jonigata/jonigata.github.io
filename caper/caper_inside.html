@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="Shift_JIS"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <title>caper -- LALR(1) �p�[�T�W�F�l���[�^</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS"/>
+    <title>caper -- LALR(1) パーサジェネレータ</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <style type="text/css">
       <!--
 		  @import url("global.css");
@@ -36,63 +36,63 @@
 		<a href="caper_tutorial5.html">Tutorial5</a>
       </div>
       <div id="content">
-		<h2><a name="i2"> </a> ���@</h2>
+		<h2><a name="i2"> </a> 動機</h2>
 		<p>
-		  ���������͓Ǝ���������̂��ړI�������̂ŁA���낢��ȃp�[�T�W�F�l���[�^�������Ă݂��̂ł����A�ȉ��̂悤�Ȋ����Ŗ����ł�����̂�����܂���ł����B</p>
+		  そもそもは独自言語を作るのが目的だったので、いろいろなパーサジェネレータを試してみたのですが、以下のような感じで満足できるものがありませんでした。</p>
 		<dl>
-		  <dt><a href="http://www.gnu.org/software/bison/">bison</a>�Ebyacc</dt>
-		  <dl>���݌v�̌Â����ڗ��B���̃R�[�h�̎ז��ɂȂ�B���C�Z���X�������B</dl>
+		  <dt><a href="http://www.gnu.org/software/bison/">bison</a>・byacc</dt>
+		  <dl>→設計の古さが目立つ。他のコードの邪魔になる。ライセンスも微妙。</dl>
 		  <dt><a href="http://dparser.sourceforge.net/">D parser</a></dt>
-		  <dl>���ŋ߂܂Ŏg���Ă����ǁA�f�[�^�̗^�����ɖ�肪����BVC�œ������̂���ς���������</dl>
+		  <dl>→最近まで使ってたけど、データの与え方に問題がある。VCで動かすのも大変そうだった</dl>
 		  <dt><a href="http://www.cs.berkeley.edu/~smcpeak/elkhound/">Elkhound</a></dt>
-		  <dl>���Y�ꂽ���ǎg���Â炩����(�T���v���s���ňӖ����킩��Ȃ������񂾂������ȁH)</dl>
+		  <dl>→忘れたけど使いづらかった(サンプル不足で意味がわからなかったんだったかな？)</dl>
 		  <dt><a href="http://spirit.sourceforge.net/">spirit</a></dt>
-		  <dl>���f�o�b�O�炷���Ő�]�A�܂��o����</dl>
-		  <dt>���̂���</dt>
-		  <dl>�����Ƃ͂�������yacc�Ɠ��l</dl>
+		  <dl>→デバッグつらすぎで絶望、涙が出そう</dl>
+		  <dt>他のもの</dt>
+		  <dl>→あとはだいたいyaccと同様</dl>
 		</dl>
-		<p>����v���O���~���O�Ŕ|��ꂽ�ė��p���𓱓�����΁A�����Ƃ��낢��ȂƂ���Ńp�[�T�W�F�l���[�^���g����͂��Ȃ̂ɁA�ǂ��������̃p�[�T�W�F�l���[�^�͌Â��݌v(yacc�̎���)���甲���o�Ă��Ȃ����������Ďg���Â炢���Ƃ������A�Ƃ������ƂŎԗւ̍Ĕ����ɓ��ݐ؂�܂����B����Ȃ킯�ŁA�����v��������A���\�Ȍ���A�s�ւȓ_�͂��ׂĎ�菜��������ł��B</p>
-		<p>��{�I�Ƀh���S���u�b�N(�ꕔ&quot;Modern Compiler Implementation in Ml&quot;)�̃A���S���Y����f���Ɏ������������ł��B�w��I�ȐV�����Ƃ��ɂ͊��҂��Ȃ��ł��������B</p>
+		<p>現代プログラミングで培われた再利用性を導入すれば、もっといろいろなところでパーサジェネレータを使えるはずなのに、どうも既存のパーサジェネレータは古い設計(yaccの呪縛)から抜け出ていない感があって使いづらいことが多い、ということで車輪の再発明に踏み切りました。そんなわけで、私が思いつく限り、かつ可能な限り、不便な点はすべて取り除いたつもりです。</p>
+		<p>基本的にドラゴンブック(一部&quot;Modern Compiler Implementation in Ml&quot;)のアルゴリズムを素直に実装しただけです。学問的な新しさとかには期待しないでください。</p>
 
-		<h2><a name="i6"> </a> �\�[�X�t�@�C���̊ȒP�Ȑ���</h2>
+		<h2><a name="i6"> </a> ソースファイルの簡単な説明</h2>
 		<dl>
-		  <dt><code>grammar.hpp</code></dt>	<dd>--- ���I���@��`�p�C���^�[�t�F�C�X�N���X�Q</dd>
-		  <dt><code>lr.hpp</code></dt>		<dd>--- ���ILR�n��̓G���W���̋��ʕ�</dd>
-		  <dt><code>fastlalr.hpp</code></dt>	<dd>--- ���ILALR(1)��̓G���W�� grammar.hpp�̕��@����e�[�u���E�p�[�T���쐬����</dd>
-		  <dt>������3�̃t�@�C�������I�p�[�T�G���W��</dt><dd><br/></dd>
+		  <dt><code>grammar.hpp</code></dt>	<dd>--- 動的文法定義用インターフェイスクラス群</dd>
+		  <dt><code>lr.hpp</code></dt>		<dd>--- 動的LR系解析エンジンの共通部</dd>
+		  <dt><code>fastlalr.hpp</code></dt>	<dd>--- 動的LALR(1)解析エンジン grammar.hppの文法からテーブル・パーサを作成する</dd>
+		  <dt>↑この3つのファイルが動的パーサエンジン</dt><dd><br/></dd>
 
-		  <dt><code>caper_ast.hpp</code></dt>  <dd>--- caper���͕��@�t�@�C��(<code>.cpg</code>)�̒��ۍ\���؂̒�`</dd>
-		  <dt><code>caper.cpp</code></dt>      <dd>--- �{��</dd>
+		  <dt><code>caper_ast.hpp</code></dt>  <dd>--- caper入力文法ファイル(<code>.cpg</code>)の抽象構文木の定義</dd>
+		  <dt><code>caper.cpp</code></dt>      <dd>--- 本体</dd>
 		  <dt><code>caper_cpg.cpp</code></dt>
 		  <dl>
-			<dt><code>make_cpg_parser</code></dt>         <dd>--- caper���͕��@�t�@�C��(<code>.cpg</code>)�p�[�T�̍쐬���[�`��<br/>&lt;���I�p�[�T�G���W���̗�&gt;</dd>
-			<dt><code>collect_informations</code></dt>    <dd>--- AST����̐錾�E�^��`�̎��W</dd>
+			<dt><code>make_cpg_parser</code></dt>         <dd>--- caper入力文法ファイル(<code>.cpg</code>)パーサの作成ルーチン<br/>&lt;動的パーサエンジンの例&gt;</dd>
+			<dt><code>collect_informations</code></dt>    <dd>--- ASTからの宣言・型定義の収集</dd>
 		  </dl>
 		  <dt><code>caper_tgt.cpp</code></dt>
 		  <dl>
-			<dt><code>make_target_parser</code></dt>      <dd>--- ���͕��@����^�[�Q�b�g�\����̓e�[�u������郋�[�`��</dd>
+			<dt><code>make_target_parser</code></dt>      <dd>--- 入力文法からターゲット構文解析テーブルを作るルーチン</dd>
 		  </dl>
-		  <dt><code>caper_generate_cpp.cpp</code></dt>	<dd>--- c++�W�F�l���[�^</dd>
-		  <dt><code>caper_generate_js.cpp</code></dt>	<dd>--- JavaScript�W�F�l���[�^</dd>
+		  <dt><code>caper_generate_cpp.cpp</code></dt>	<dd>--- c++ジェネレータ</dd>
+		  <dt><code>caper_generate_js.cpp</code></dt>	<dd>--- JavaScriptジェネレータ</dd>
 		</dl>
 
-		<h2><a name="i8"> </a> ��O���S�ɂ���</h2>
-		<p>caper�̏o�͂���p�[�T���g�́A��ؗ�O�𔭐������܂���B</p>
-		<p>�������Ȃ���A�e���v���[�g�p�����[�^�́u<code>Value</code>�v�Ɓu<code>SemanticAction</code>�v�ɂ��Ă͔z�����K�v�ł��B</p>
-		<p><code>SemanticAction</code>�Ɋւ��ẮA���S�������I�ɂ��قƂ�Ǖς��Ȃ��������s�����Ƃ��ł��܂����B�]���āA<code>SemanticAction</code>���ł͎��R�ɗ�O�𔭐������Ă��܂��܂���B<code>SemanticAction</code>����O�ɂ���Ē��f���ꂽ�ꍇ�A����<code>SemanticAction</code>���N������<code>post</code>�Ăяo�������f����A�p�[�T�̓������(�X�^�b�N)��<code>post</code>�Ăяo�����O�܂Ŋ����߂���܂��B������u�����ۏ؁v�ł��B</p>
-		<p>����A<code>Value</code>�̏������܂ރX�^�b�N�̈����Ɋւ��ẮA�u�����ۏ؁v����������ɂ́A���̂Ƃ���X�^�b�N���܂�܂�o�b�N�A�b�v���Ă����悤�ȕ��ׂ̍����������@�����v�����Ă��܂���B���̂��ߌ���ł͑Ώ����s���Ă��܂���B</p>
-		<p>���ۂ̎g�p�ł��ꂪ���ɂȂ�̂́A�e���v���[�g�p�����[�^<code>&quot;Value&quot;</code>��</p>
+		<h2><a name="i8"> </a> 例外安全について</h2>
+		<p>caperの出力するパーサ自身は、一切例外を発生させません。</p>
+		<p>しかしながら、テンプレートパラメータの「<code>Value</code>」と「<code>SemanticAction</code>」については配慮が必要です。</p>
+		<p><code>SemanticAction</code>に関しては、安全かつ効率的にもほとんど変わらない実装を行うことができました。従って、<code>SemanticAction</code>内では自由に例外を発生させてかまいません。<code>SemanticAction</code>が例外によって中断された場合、その<code>SemanticAction</code>を起動した<code>post</code>呼び出しも中断され、パーサの内部状態(スタック)も<code>post</code>呼び出し直前まで巻き戻されます。いわゆる「強い保証」です。</p>
+		<p>一方、<code>Value</code>の処理を含むスタックの扱いに関しては、「強い保証」を実現するには、今のところスタックをまるまるバックアップしておくような負荷の高い実装方法しか思いついていません。そのため現状では対処を行っていません。</p>
+		<p>実際の使用でこれが問題になるのは、テンプレートパラメータ<code>&quot;Value&quot;</code>が</p>
 		<ul  class="list1">
-		  <li> �������R���X�g���N�^�ŗ�O�𔭐�������</li>
-		  <li> �R�s�[�R���X�g���N�^�ŗ�O�𔭐�������</li>
-		  <li> <code>operator=</code>�ŗ�O�𔭐�������</li>
-		  <li> �f�X�g���N�^�ŗ�O�𔭐�������</li>
+		  <li> 無引数コンストラクタで例外を発生させる</li>
+		  <li> コピーコンストラクタで例外を発生させる</li>
+		  <li> <code>operator=</code>で例外を発生させる</li>
+		  <li> デストラクタで例外を発生させる</li>
 		</ul>
-		<p>�Ƃ��ł��B�������s��Ȃ��悤�ɂ���Γ��ɖ�肠��܂���B���Ƃ��΁A<code>Value</code>��<code>int</code>�₽���̃|�C���^�ł���Ζ�肠��܂���B</p>
-		<p><code>Value</code>����L�̃����o�֐��ŗ�O�𔭐��������ꍇ�A�p�[�T�̏�Ԃ͕s��ɂȂ�A�㑱��<code>post</code>�̌��ʂ͕s��ɂȂ�܂�(�A�N�Z�X��O�ɂȂ邩������܂���)�B�s��ɂȂ����ꍇ�A<code>reset</code>���邱�Ƃŉ񕜂ł��܂����A���R�p�[�T�̏�Ԃ͏�����Ԃɖ߂�܂��B�p�[�T�̏�Ԃ��s��ɂȂ��Ă����\�[�X���[�N�Ȃǂ͔������Ȃ��̂ŁA�j���͈��S�ɍs�����Ƃ��ł��܂��B�s��̂܂ܔj�����Ă��\���܂���B</p>
-		<p>���Ԃ��������Ă��p�[�T�̏�Ԃ�ۑ����Ă��������ꍇ�́A�R�s�[�R���X�g���N�^���g���Ă�����p�[�T�C���X�^���X������Ă����Ă��������B��L�́u�X�^�b�N�̃R�s�[�͍����ׁv�͈�ʓI�ȍň�������O���ɏq�ׂĂ�����̂ł���ALALR�p�[�T�̃X�^�b�N��(���@�ƃf�[�^�ɂ��܂���)���p��͌����قǐ[���͂Ȃ�Ȃ��Ǝv���܂��B</p>
-		<p>���̂ق��Acaper���X�^�b�N��<code>std::vector</code>���g���ꍇ�A<code>std::vector</code>�����������蓖�ē��ŗ�O�𔭐�������\��������܂����A���̏ꍇ�A�p�[�T�́A<code>SemanticAction</code>���̗�O�Ɠ��l�ɓK�؂Ɉ����܂��B�I�v�V������STL���g��Ȃ����Ƃ��ł��A���̏ꍇ��O�͔������܂��񂪁A����ɃX�^�b�N�̑傫���ɐ����������܂��B</p>
-		<p>�܂��A���܂̂Ƃ���A�u�C���g���č�������肾���ǂ܂��o�O�͂��邩���v���炢�̊����ł��B</p>
+		<p>ときです。これらを行わないようにすれば特に問題ありません。たとえば、<code>Value</code>が<code>int</code>やただのポインタであれば問題ありません。</p>
+		<p><code>Value</code>が上記のメンバ関数で例外を発生させた場合、パーサの状態は不定になり、後続の<code>post</code>の結果は不定になります(アクセス例外になるかもしれません)。不定になった場合、<code>reset</code>することで回復できますが、当然パーサの状態は初期状態に戻ります。パーサの状態が不定になってもリソースリークなどは発生しないので、破棄は安全に行うことができます。不定のまま破棄しても構いません。</p>
+		<p>時間がかかってもパーサの状態を保存しておきたい場合は、コピーコンストラクタを使ってもう一つパーサインスタンスを作っておいてください。上記の「スタックのコピーは高負荷」は一般的な最悪条件を念頭に述べているものであり、LALRパーサのスタックは(文法とデータによりますが)実用上は言うほど深くはならないと思います。</p>
+		<p>そのほか、caperがスタックに<code>std::vector</code>を使う場合、<code>std::vector</code>がメモリ割り当て等で例外を発生させる可能性がありますが、この場合、パーサは、<code>SemanticAction</code>時の例外と同様に適切に扱います。オプションでSTLを使わないこともでき、その場合例外は発生しませんが、代わりにスタックの大きさに制限が加わります。</p>
+		<p>まあ、いまのところ、「気を使って作ったつもりだけどまだバグはあるかも」くらいの感じです。</p>
       </div>
 
       <div id="footer">Content &copy; 2006-2008 Naoyuki HIRAYAMA</div>
