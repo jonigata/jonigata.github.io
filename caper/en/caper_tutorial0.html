@@ -38,7 +38,7 @@
       <div id="content">
 		<h1><a name="i0"> </a> tutorial 0 -- hello world &alpha;</h1>
 		<p>
-		  The target of this tutorial is the persons that have handled BNF for yacc or yacc-like program.</p>
+		  The target of this tutorial is the persons those have handled BNF for yacc or yacc-like program.</p>
 		<p>
 		  The first example is hello world.</p>
 		<h2><a name="i1"> </a> Input Grammar File</h2>
@@ -64,7 +64,7 @@ enum Token {
 		<h4>At Line 2:</h4>
 		<p>This declares namespace name. Output header will be surrounded by this namespace. If not specified, default is <code>&quot;caper_parser&quot;</code>.</p>
 		<h4>At Line 3:</h4>
-		<p>This declares the parser stack uses array instead of STL. If it use array, no dynamic allocation will be occured but the size will be limited.</p>
+		<p>This declares the parser stack uses array instead of STL. If it uses array, no dynamic allocation will be occured but the size will be limited.</p>
 		<h4>At Line 5:</h4>
 		<p>This is a grammar definition in BNF.</p>
 		<p>The grammar is a set of grammar rules. Grammar rules are specified in the following format:</p>
@@ -126,11 +126,11 @@ public:
 
 #endif // #ifndef HELLO_WORLD_HPP
 </pre>
-		<p>(Implement was omitted)</p>
+		<p>(Implementation was omitted)</p>
 
 		<h2><a name="i3"> </a> Use the parser in your program</h2>
 		<p>
-		  The following code is an example that use the above parser from main program.</p>
+		  The following code is an example that uses the above parser from main program.</p>
 <pre>
 #include &lt;iostream&gt;
 #include &quot;hello0.hpp&quot;
@@ -168,7 +168,7 @@ int main( int, char** )
 		<p>The 3rd parameter of class template "Parser" was omitted.
 		The 3rd parameter is an integer (default is 0 if STL was used for stack, or 1024 if STL was not used).
 		When 'StackSize' is zero and STL is used for stack,
-		the parser stack doesn't overflow (it raises std::bad_alloc)</P>
+		the parser stack doesn't overflow (but it can raise std::bad_alloc)</P>
 		<h4><a name="i7"> </a>At Line 12 to 14:</h4>
 		<p>
 		  It gives tokens to the parser. 
@@ -178,7 +178,7 @@ int main( int, char** )
 		<p>
 		  No output.</p>
 		<p>
-		  It's all of basic functionality of caper.</p>
+		  It's outline of basic functionality of caper.</p>
       </div>
 
       <div id="footer">Content &copy; 2006-2008 Naoyuki HIRAYAMA</div>
