@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="js">
+  <head>
+    <meta charset="utf-8">
+    <title>評価用作品集</title>
+    <link rel="stylesheet" href="index.css">
+  </head>
+  <body>
+    <div id="container">
+      <div id="banner">
+	<div id="header"><a href="works.html">評価用作品集</a></div>
+	<div id="subtext"></div>
+      </div>
+      <div id="right">
+	<div class="title"><b>目次</b></div>
+	<a href="#environment">環境について</a>
+	<a href="#butabox">作品1: ぶたさんたくさん</a>
+	<a href="#papiko">作品2: 人体</a>
+	<a href="#butasan">作品3: ぶたさんレース</a>
+	<a href="#meshtoy">作品4: meshtoy</a>
+	<a href="#caper">作品5: caper</a>
+	<a href="#partix">Appendix: 物理エンジン「partix」</a>
+      </div>
+      <div id="content">
+	<h2>環境について</h2>
+	<p>当方ではWindowsXP、Core2Duo2.4G、GeForce8600GTSの環境で動作を確認しています。VGAはもう少し劣るものでもかまわないはずですが、物理系の作品はCPUに関してはタイトかもしれません。</p>
+	    
+	<a name="butabox"></a>
+	<h2>作品1: ぶたさんたくさん</h2>
+	<img src="butabox.png"></img>
+	<h4>実行形式:</h4>
+	<p><a href="butabox.zip">こちら</a>。右ドラッグで回転できます。</p>
+        <p>このアプリを作成したのは5年以上前のことなのですが、最近emscripten/WebGLにも移植してみました。<a href="yamadumi/yamadumi.html" target="_">chrome、firefoxなどのブラウザでご覧になれます</a>（ロードが長いかも知れません）。これも右ドラッグで回転できます。</p>
+	<h4>説明:</h4>
+	<p>自作SoftBody物理エンジン「partix」のサンプルです。partixは<a href="https://github.com/jonigata/partix">githubで公開している</a>フリーのtemplateライブラリです（ただし現状ドキュメントは全くないので、公開していると言ってもファイルをそこに置いてある程度の状態です）<p>
+	<p>partixは「<a href="http://www.beosil.com/publications.html">Meshless Deformations Based on Shape Matching</a>」をベースとした物理エンジンで、物体のやわらかさを表現できることが最大の特徴です。また任意形状を基本としているので、本サンプルでも足から落ちたぶたさんは立ち、背中から落ちたぶたさんは転がる、といったような挙動を示します。</p>
+	<p>本サンプルでは内部的な変形をトランスフォーム行列で表現可能な範囲でしかモデルに反映していないため、「硬さ」を下げると若干壁をつきぬけたように見えますが、内部的には頂点単位で変形しています。これを表示用頂点に反映することも技術的にはさほど難しくありませんが、頂点バッファへの書き込みと法線計算を必要とするため、パフォーマンスに影響を与えてしまいます。経験上動きさえ柔らかくなっていれば柔らかく見えるので、本サンプルでは行わないことにしています。</p>
+	<p>Core2Duo2.4GHz(但しシングルスレッド)で5体まで60FPSで動くことを確認しています。partixの動作速度はエンティティの頂点数などによりますので、モデルの数や精度を制限すればこれより性能の低いプラットフォームでも実用的な速度で動作可能です。見た目用のモデルと物理用のモデルは異なるものを利用できるので、精度を必要としない局面ではおおざっぱなモデルを利用することも可能です。本サンプルではほぼ同一のモデルを用いています。</p>
+	<p>GPGPUによる衝突判定などもテスト済みで、それなりのパフォーマンス(衝突判定部分のみで約2倍程度)を出していますが、プラットフォームの制限が大きすぎるのでC\本サンプルでは適用していません。</p>
+	<p>同様のものをムービー化したものをニコニコ動画にアップロードしておりますので、お時間があればそちらもご覧ください。そちらでは表示用と物理用に異なるモデルを用いており、物理用に頂点数の少ないモデルを利用しているので、10体まで60FPSで動いています。</p>
+	<iframe width="312" height="176" src="http://www.nicovideo.jp/thumb/sm2659130" scrolling="no" style="border:solid 1px #CCC;" frameborder="0"><a href="http://www.nicovideo.jp/watch/sm2659130">【ニコニコ動画】はちゅね山積み</a></iframe>
+	<iframe width="312" height="176" src="http://www.nicovideo.jp/thumb/sm2704475" scrolling="no" style="border:solid 1px #CCC;" frameborder="0"><a href="http://www.nicovideo.jp/watch/sm2659130">【ニコニコ動画】はちゅねボーリング</a></iframe>
+	<iframe width="312" height="176" src="http://www.nicovideo.jp/thumb/sm2902260" scrolling="no" style="border:solid 1px #CCC;" frameborder="0"><a href="http://www.nicovideo.jp/watch/sm2659130">【ニコニコ動画】はちゅねデスクトップ</a></iframe>
+
+	<p>partixのドキュメントは未整備ですが、<a href="http://d.hatena.ne.jp/jonigata/searchdiary?word=%2a%5bpartix%5d">ブログ</a>でドキュメント化を進めていました。</p>
+        <p>最近実装したemscripten/WebGL版を<a href="http://wlog.flatlib.jp/item/1734#c599">知人にモバイル環境でテストをして頂いたデータ</a>もあります。思ったよりも高速で動作するのでemscriptenの性能に驚いておりました。</p>
+	
+	<h4>操作方法:</h4>
+	<p>
+	  <b>右ドラッグ</b>: カメラの回転(重力方向も変化)<br/>
+	  <b>左クリック</b>: ぶたさんの選択<br/>
+	  <b>左ドラッグ</b>(何もないところ): ズーム<br/>
+	  <b>左ドラッグ</b>(選択したぶたさん): 引っ張る</p>
+	<h4>ソースの簡単な説明</h4>
+	<p>場所: partix/examples/butabox</p>
+	<p>
+	  アプリ
+	  <dl>
+	    <dt><b>butabox.cpp</b></dt><dd>メイン</dd>
+	    <dt><b>camera.[hc]pp</b></dt><dd>カメラ</dd>
+	    <dt><b>mouse_acceptor,mouse_dispatcher.[hc]pp</b></dt><dd>マウス処理用クラス</dd>
+	    <dt><b>dashboard.[hc]pp</b></dt><dd>UI(widgetを使役するクラス)</dd>
+	    <dt><b>mqoreader.[hc]pp</b></dt><dd>MQO(メタセコイヤのファイル)パーサ</dd>
+	    <dt><b>room.[hc]pp</b></dt><dd>青い箱を描画するクラス</dd>
+	    <dt><b>shape.[hc]pp</b></dt><dd>ぶたのモデルを描画するクラス</dd>
+	    <dt><b>stdafx.h, stdafx.cpp</b></dt><dd>プリコンパイルヘッダ関係</dd>
+	    <dt><b>texture_locker.hpp</b></dt><dd>D3DXテクスチャにアクセスするためのユーティリティ</dd>
+	    <dt><b>timer.hpp</b></dt><dd>フレームレート管理</dd>
+	    <dt><b>misc.hpp</b></dt><dd>雑多な関数</dd>
+	    <dt><b>trivial_2d.hpp</b></dt><dd>widgetで使用する頂点座標定義</dd>
+	  </dl>
+	  システム
+	  <dl>
+	    <dt><b>widget/*.[hc]pp</b></dt><dd>UIシステム、各種コントロール</dd>
+	    <dt><b>../../include/partix/*.hpp</b></dt><dd>物理エンジン</dd>
+	    <dt><b>../../include/zw/*.hpp</b></dt><dd>自作Win32APIラッパー</dd>
+	  </dl>
+	</p>
+	<a name="papiko"></a>
+	<h2>作品2: 人体</h2>
+	<img src="papiko.png"></img>
+	<h4>実行形式:</h4>
+	<br/><a href="papiko.zip">こちら</a>
+	<h4>説明:</h4>
+	<p>物理エンジン「partix」サンプル＋クロスシミュレーションです。</p>
+	<p>partixエンジンはいったんエンティティを粒子に解体してシミュレーションを行う方式であるため、クロスシミュレーションともよい相性を持っています。また未挑戦ではありますが、原理上おそらく流体(<a href="http://www.4gamer.net/games/032/G003263/20070928048/">OctaveEngineのようなアプローチ</a>)との相性もよいと思われます。</p>
+	<p>表示面では、内部的にサブディヴィジョンを行って、物理エンティティとの継ぎ目の分かりにくい高精度なスキニングを実現しています。</p>
+	<p>またちょっと分かりにくいとは思いますが、特殊なシェーダ(汎用表引きシェーダ)で柔らかめの肌の色を出したり、スペキュラマップで光沢の出る場所を制御したりもしています。</p>
+	<h4>操作方法:</h4>
+	<p>
+	  <b>右ドラッグ</b>: カメラの回転<br/>
+	  <b>左ドラッグ</b>(何もないところ): ズーム<br/>
+	  <b>左ドラッグ</b>(スカート、体): スカートを引っ張る、胸を触る<br/>
+	  <b>Sキー</b>: 物理エンティティの可視化<br/>
+	</p>
+	<h4>ソースの簡単な説明</h4>
+	<p>場所: partix/examples/papiko</p>
+	<p>
+	  アプリ
+	  <dl>
+	    <dt><b>papiko.cpp</b></dt><dd>メイン</dd>
+	    <dt><b>camera.[hc]pp</b></dt><dd>カメラ</dd>
+	    <dt><b>mouse_acceptor,mouse_dispatcher.[hc]pp</b></dt><dd>マウス処理用クラス</dd>
+	    <dt><b>cloth.[hc]pp</b></dt><dd>服の描画クラス</dd>
+	    <dt><b>finger.[hc]pp</b></dt><dd>指に対応するクラス</dd>
+	    <dt><b>wavefront_obj.hpp</b></dt><dd>WAVEFRONT OBJ形式のパーサ</dd>
+	    <dt><b>room.[hc]pp</b></dt><dd>青い箱を描画するクラス</dd>
+	    <dt><b>papishape.[hc]pp</b></dt><dd>人体を描画するクラス</dd>
+	    <dt><b>partix_common.hpp</b></dt><dd>partix用の設定ファイル</dd>
+	    <dt><b>stdafx.h, stdafx.cpp</b></dt><dd>プリコンパイルヘッダ関係</dd>
+	    <dt><b>texture_locker.hpp</b></dt><dd>D3DXテクスチャにアクセスするためのユーティリティ</dd>
+	    <dt><b>timer.hpp</b></dt><dd>フレームレート管理</dd>
+	    <dt><b>mathutil.hpp</b></dt><dd>雑多な関数</dd>
+	    <dt><b>trivial_2d.hpp</b></dt><dd>widgetで使用する頂点座標定義</dd>
+	  </dl>
+	  システム
+	  <dl>
+	    <dt><b>widget/*.[hc]pp</b></dt><dd>UIシステム、各種コントロール</dd>
+	    <dt><b>../../include/partix/*.hpp</b></dt><dd><a href="#partix">物理エンジン</a></dd>
+	    <dt><b>../../include/zw/*.hpp</b></dt><dd>自作Win32APIラッパー</dd>
+	  </dl>
+	</p>
+	<a name="butasan"></a>
+	<h2>作品3: ぶたさんレース</h2>
+        <video controls>
+          <source src="butasan.webm" type="video/webm"/>
+          <source src="butasan.mp4" type="video/mp4"/>
+          I'm sorry; your browser doesn't support HTML5 video.
+          <!-- 古いブラウザで mp4 ビデオを再生するために、Flash プレイヤーを埋め込むことができます -->
+        </video>
+
+	<h4>ダウンロード:</h4>
+	<p>諸事情により実行ファイルを公開できないため、ムービーをご覧ください。<p>
+	<h4>説明:</h4>
+	<p>自作SoftBody物理エンジン「partix」のサンプルです。</p>
+	<p>「安定性の低い自機を操ってオフロードレースやアスレチックス的な楽しさを表現する」というコンセプトになっています。</p>
+	<a name="meshtoy"></a>
+	<h2>作品4: meshtoy</h2>
+	<img src="meshtoy.png"></img>
+        <p><a href="meshtoy-2015-02-28.zip">実行ファイル</a></p>
+	<p>フリーソフトとして公開していたスカルプトツールですが、需要が小さい、他にもっとよいフリーのスカルプトツールが登場した、メンテに労力を割けなくなった、などの理由で公開をやめました。</p>
+	<p>とはいえ、やや高度な機能もいつくか実装されています(メッシュリダクション、メッシュサブディヴィジョン、内部でサブディヴィジョンを行ってのメッシュマッチング、など)。</p>
+	<a name="caper"></a>
+	<h2>作品5: caper</h2>
+<pre>
+namespace calc {
+
+enum Token {
+    token_eof,
+    token_Add,
+    token_Div,
+    token_Mul,
+    token_Number,
+    token_Sub,
+};
+
+template &lt; class Value, class SemanticAction, int StackSize &gt;
+class Parser {
+public:
+    typedef Token token_type;
+    typedef Value value_type;
+
+public:
+    Parser( SemanticAction&amp; sa );
+
+    void reset();
+    bool post( token_type token, const value_type&amp; value );
+    bool accept( value_type&amp; v );
+    bool error();
+};
+
+} // namespace calc
+
+</pre>
+	<p><a href="https://github.com/jonigata/caper">フリーソフトとしてgithubで公開中</a>のパーサジェネレータです。</p>
+	<p>パーサジェネレータとしては特別高度なアルゴリズムは用いていませんが、出力するコードはかなり再利用性の高いものとなっています。最近内部コードをC++11で書き換えました。</p>
+        <p>PullRequestをいくつか頂いた結果、C++, Java, JavaScript, D, C#, Boo, Ruby, PHP, Haxe とかなりたくさんの言語でパーサを出力できるようになりました。</p>
+        <p>caperを使ってC言語のパーサを書かれた方もいらっしゃいます。</p>
+        <p>自分でも、caperを作ってLLVM IRを出力するtoy compilerを実装したことがあります(caperのレポジトリに含まれていますが、LLVMのバージョンアップに追従していないので現状はビルドができない状態です)。また業務でデータ変換ツールにもよく利用しています。</p>
+	<a name="partix"></a>
+	<h2>Appendix: 物理エンジン「partix」のソースについての簡単な説明</h2>
+	<p>
+	  <dl>
+	    <dt><b>partix.hpp</b></dt><dd>ユーザインクルード用ヘッダ</dd>
+	    <dt><b>partix_forward.hpp</b></dt><dd>前方参照</dd>
+	    <dt><b>partix_world.hpp</b></dt><dd>物理世界</dd>
+	    <dt><b>partix_body.hpp</b></dt><dd>物体のインターフェイス</dd>
+	    <dt><b>partix_shell.hpp</b></dt><dd>中空の任意メッシュのインターフェイス</dd>
+	    <dt><b>partix_volume.hpp</b></dt><dd>三角錐を重点した任意メッシュのインターフェイス</dd>
+	    <dt><b>partix_collidable.hpp</b></dt><dd>衝突可能物体のインターフェイス</dd>
+	    <dt><b>partix_plane.hpp</b></dt><dd>具象物体(平面)</dd>
+	    <dt><b>partix_rigid.hpp</b></dt><dd>具象物体(剛体)<b>※ほとんど未実装</b></dd>
+	    <dt><b>partix_softshell.hpp</b></dt><dd>具象物体(非剛体で中空の任意メッシュ)</dd>
+	    <dt><b>partix_softvolume.hpp</b></dt><dd>具象物体(非剛体で三角錐を充填した任意メッシュ)</dd>
+	    <dt><b>partix_constraint.hpp</b></dt><dd>衝突データ構造</dd>
+	    <dt><b>partix_contact.hpp</b></dt><dd>接触データ構造</dd>
+	    <dt><b>partix_tetrahedral_mesh.hpp</b></dt><dd>tetrahedral mesh(softvolumeに用いるデータ)</dd>
+	    <dt><b>partix_geometry.hpp</b></dt><dd>下層データ構造(辺、面、三角錐)</dd>
+	    <dt><b>partix_cloth.hpp</b></dt><dd>具象物体(布)</dd>
+	    <dt><b>partix_block.hpp</b></dt><dd>インデックスバッファのようなもの</dd>
+	    <dt><b>partix_cloud.hpp</b></dt><dd>バーテックスバッファのようなもの</dd>
+	    <dt><b>partix_point.hpp</b></dt><dd>下層データ構造(点)</dd>
+	    <dt><b>partix_id.hpp</b></dt><dd>物体ID</dd>
+	    <dt><b>partix_math.hpp</b></dt><dd>数学ユーティリティ</dd>
+	    <dt><b>partix_utilities.hpp</b></dt><dd>雑多ユーティリティ</dd>
+	    <dt><b>partix_spatial_hash.hpp</b></dt><dd>spatial hash</dd>
+	    <dt><b>partix_rayprocessor.hpp</b></dt><dd>RAY-TRIANGLEテストのドライバ</dd>
+	    <dt><b>aabb_tree.hpp</b></dt><dd>AABBツリーの実装</dd>
+	    <dt><b>cpu_ray_triangle_tester.hpp</b></dt><dd>RAY-TRIANGLEテスト</dd>
+	    <dt><b>fixed_pool.hpp</b></dt><dd>固定長メモリアロケータ</dd>
+	    <dt><b>performance_counter.hpp</b></dt><dd>時間測定用クラス</dd>
+	    <dt><b>voxel_traverser.hpp</b></dt><dd>ボクセルトラバース(3D-DDA)</dd>
+	  </dl>
+	</p>
+      </div>
+      <div id="footer">Content &copy; 2008 Naoyuki HIRAYAMA</div>
+      <!-- Designed by and (c) Copyright 2005 Shady-Sock ( http://www.oswd.org/userinfo.phtml?user=Shady-Sock ). Email ( sani.sarip@gmail.com ). Do not remove this. -->
+    </div>
+  </body>
+</html>
